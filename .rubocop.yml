@@ -1,0 +1,11 @@
+AllCops:
+  Exclude:
+    - 'db/**/*'
+    - 'Gemfile'
+Documentation:
+  Enabled: false
+Metrics/LineLength:
+  Max: 112
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*'
