@@ -1,2 +1,0 @@
-class Transition < ApplicationRecord
-end

@@ -45,18 +45,16 @@ ActiveRecord::Schema.define(version: 20170126143943) do
     t.datetime "updated_at", :null=>false
   end
 
-  create_table "transitions", force: :cascade do |t|
-    t.string   "from"
-    t.string   "to"
-    t.boolean  "active",     :index=>{:name=>"index_transitions_on_active", :using=>:btree}
+  create_table "states", force: :cascade do |t|
+    t.string   "name",       :index=>{:name=>"index_states_on_name", :unique=>true, :using=>:btree}
+    t.integer  "from_id",    :foreign_key=>{:references=>"states", :name=>"fk_states_from_id", :on_update=>:no_action, :on_delete=>:no_action}, :index=>{:name=>"fk__states_from_id", :using=>:btree}
     t.datetime "created_at", :null=>false
     t.datetime "updated_at", :null=>false
-
-    t.index ["active", "from", "to"], :name=>"index_transitions_on_active_and_from_and_to", :unique=>true, :using=>:btree
   end
 
   create_table "vehicles", force: :cascade do |t|
     t.string   "name"
+    t.string   "state"
     t.datetime "created_at", :null=>false
     t.datetime "updated_at", :null=>false
   end
