@@ -53,5 +53,16 @@ RSpec.describe Vehicle, type: :model do
       expect(subject.save).to be(false)
       expect(subject.errors).to include(:state)
     end
+
+    context 'new states' do
+      let!(:released) { create :state, name: 'released', from: tested }
+
+      it 'should be reachable' do
+        subject.update_attribute(:state_id, tested.id )
+        expect(subject.state).to eq(tested)
+        subject.next_state!
+        expect(subject.state).to eq(released)
+      end
+    end
   end
 end
