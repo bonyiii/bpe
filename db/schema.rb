@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170126143943) do
+ActiveRecord::Schema.define(version: 20170126154553) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,7 +54,7 @@ ActiveRecord::Schema.define(version: 20170126143943) do
 
   create_table "vehicles", force: :cascade do |t|
     t.string   "name"
-    t.string   "state"
+    t.integer  "state_id",   :foreign_key=>{:references=>"states", :name=>"fk_vehicles_state_id", :on_update=>:no_action, :on_delete=>:no_action}, :index=>{:name=>"fk__vehicles_state_id", :using=>:btree}
     t.datetime "created_at", :null=>false
     t.datetime "updated_at", :null=>false
   end
