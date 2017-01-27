@@ -13,8 +13,12 @@ module Bpe
 
         desc 'Create new state'
         params do
-          requires :name, type: String, desc: 'State name'
-          optional :from_id, type: Integer, desc: 'From which state a transition to this state is allowed'
+          requires :name,
+                   type: String,
+                   desc: 'State name'
+          optional :from_state_id,
+                   type: Integer,
+                   desc: 'From which state a transition to this state is allowed'
         end
         post do
           authorize :state, :create?
@@ -35,8 +39,12 @@ module Bpe
         desc 'Update state'
         route_param :id do
           params do
-            optional :name, type: String, desc: 'State name'
-            optional :from_id, type: Integer, desc: 'From which state a transition to this state is allowed'
+            optional :name,
+                     type: String,
+                     desc: 'State name'
+            optional :from_state_id,
+                     type: Integer,
+                     desc: 'From which state a transition to this state is allowed'
           end
           put do
             state = State.find(params[:id])

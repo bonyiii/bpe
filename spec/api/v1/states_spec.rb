@@ -31,7 +31,8 @@ describe Bpe::V1::States do
     context 'POST /api/v1/states' do
       let(:state_params) do
         {
-          name: 'released'
+          name: 'released',
+          from_state_id: tested.id
         }
       end
 
