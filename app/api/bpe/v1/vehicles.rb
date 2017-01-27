@@ -17,7 +17,7 @@ module Bpe
         post do
           vehicle = Vehicle.create!(params)
 
-          { vehicle: vehicle }
+          { vehicle: vehicle.render(:detail) }
         end
 
         desc 'Update vehicle'
@@ -25,11 +25,11 @@ module Bpe
           params do
             optional :name, type: String, desc: 'Vehicle name'
           end
-          post do
+          put do
             vehicle = Vehicle.find(params[:id])
             vehicle.update!(params)
 
-            { vehicle: vehicle }
+            { vehicle: vehicle.render(:detail) }
           end
         end
 
@@ -39,7 +39,7 @@ module Bpe
             vehicle = Vehicle.find(params[:id])
             vehicle.destroy!
 
-            { result: 'Vehicle deleted' }
+            { result: 'Vehicle deleted' }.to_json
           end
         end
 
@@ -49,7 +49,7 @@ module Bpe
             vehicle = Vehicle.find(params[:id])
             vehicle.next_state!
 
-            { vehicle: vehicle }
+            { vehicle: vehicle.render(:detail) }
           end
         end
       end

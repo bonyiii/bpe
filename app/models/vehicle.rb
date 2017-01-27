@@ -10,11 +10,22 @@ class Vehicle < ApplicationRecord
 
   json(:index,
        only: %i(id name),
+       methods: %i(has_next_state),
        include: { state: State.json(:index) })
+
+  json(:detail,
+       only: %i(id name),
+       methods: %i(has_next_state),
+       include: { state: State.json(:index) })
+
+  def current_state_name
+    state.name
+  end
 
   def next_state?
     state.next.present?
   end
+  alias has_next_state next_state?
 
   def next_state!
     if state.next.blank?
