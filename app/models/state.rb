@@ -5,6 +5,8 @@ class State < ApplicationRecord
 
   json(:index, only: %i(id name))
 
+  json(:detail, only: %i(id name))
+
   def self.initial
     where(from: nil).first
   end
