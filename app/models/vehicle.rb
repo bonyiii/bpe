@@ -7,6 +7,10 @@ class Vehicle < ApplicationRecord
 
   before_validation :initial_state
 
+  json(:index,
+       only: %i(id name),
+       include: { state: State.json(:index)})
+
   def next_state?
     state.next.present?
   end

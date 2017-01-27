@@ -37,6 +37,7 @@ gem 'jbuilder', '~> 2.5'
 gem "schema_auto_foreign_keys"
 gem 'devise'
 gem 'grape'
+gem 'grape_on_rails_routes'
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
