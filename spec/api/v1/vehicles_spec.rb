@@ -62,7 +62,7 @@ describe Bpe::V1::Vehicles do
 
     context 'GET /api/v1/vehicles/:id' do
       it 'should read vehicle details' do
-        put "/api/v1/vehicles/#{jaguar.id}"
+        get "/api/v1/vehicles/#{jaguar.id}"
         expect(JSON.parse(response.body)['vehicle'])
           .to eq(
             'id' => jaguar.id,

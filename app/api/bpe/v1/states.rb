@@ -6,6 +6,7 @@ module Bpe
         desc 'Return all States'
         get do
           states = State.all
+          authorize :state, :index?
 
           { states: states.render(:index) }
         end
@@ -16,6 +17,7 @@ module Bpe
           optional :from_id, type: Integer, desc: 'From which state a transition to this state is allowed'
         end
         post do
+          authorize :state, :create?
           state = State.create!(params)
 
           { state: state.render(:detail) }
@@ -38,6 +40,7 @@ module Bpe
           end
           put do
             state = State.find(params[:id])
+            authorize state, :update?
             state.update!(params)
 
             { state: state.render(:detail) }
@@ -48,6 +51,7 @@ module Bpe
         route_param :id do
           delete do
             state = State.find(params[:id])
+            authorize :state, :destroy?
             state.destroy!
 
             { result: 'State deleted' }.to_json

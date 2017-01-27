@@ -13,6 +13,10 @@ module Bpe
         error_response(message: { errors: error.record.errors }, status: 422)
       end
 
+      rescue_from Pundit::NotAuthorizedError do |error|
+        error_response(message: { errors: error }, status: 403)
+      end
+
       helpers do
         def current_user
           env['warden'].user
@@ -26,6 +30,7 @@ module Bpe
 
       before do
         authenticate!
+        extend Pundit
       end
 
       mount Bpe::V1::Vehicles

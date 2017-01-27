@@ -23,6 +23,8 @@ module Bpe
         desc 'Read vehicle'
         route_param :id do
           get do
+            vehicle = Vehicle.find(params[:id])
+
             { vehicle: vehicle.render(:detail) }
           end
         end

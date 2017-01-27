@@ -35,18 +35,32 @@ describe Bpe::V1::States do
         }
       end
 
-      it 'should create a new state' do
-        expect do
-          post '/api/v1/states', params: state_params
-        end.to change { State.count }.by(1)
+      context 'admin user' do
+        let(:user) { create :admin }
 
-        expect(JSON.parse(response.body)['state']['name']).to eq(state_params[:name])
+        it 'should create a new state' do
+          expect do
+            post '/api/v1/states', params: state_params
+          end.to change { State.count }.by(1)
+
+          expect(JSON.parse(response.body)['state']['name']).to eq(state_params[:name])
+        end
+      end
+
+      context 'regular user' do
+        it 'should create a new state' do
+          expect do
+            post '/api/v1/states', params: state_params
+          end.not_to change { State.count }
+
+          expect(JSON.parse(response.body)['errors']).to include('not allowed')
+        end
       end
     end
 
     context 'GET /api/v1/states/:id' do
       it 'should read state details' do
-        put "/api/v1/states/#{designed.id}"
+        get "/api/v1/states/#{designed.id}"
         expect(JSON.parse(response.body)['state'])
           .to eq(
             'id' => designed.id,
@@ -57,16 +71,42 @@ describe Bpe::V1::States do
 
     context 'PUT /api/v1/states/:id' do
       let(:designed_params) { { name: 'Planned' } }
-      it 'should update state' do
-        put "/api/v1/states/#{designed.id}", params: designed_params
-        expect(JSON.parse(response.body)['state']['name']).to eq(designed_params[:name])
+      context 'admin user' do
+        let(:user) { create :admin }
+
+        it 'should update state' do
+          put "/api/v1/states/#{designed.id}", params: designed_params
+          expect(JSON.parse(response.body)['state']['name']).to eq(designed_params[:name])
+        end
+      end
+
+      context 'regular user' do
+        it 'should not update state' do
+          put "/api/v1/states/#{designed.id}", params: designed_params
+          expect(JSON.parse(response.body)['errors']).to include('not allowed')
+        end
       end
     end
 
     context 'DELETE /api/v1/states/:id' do
-      it 'should delete state' do
-        delete "/api/v1/states/#{tested.id}"
-        expect(JSON.parse(response.body)).to eq('result' => 'State deleted')
+      context 'admin user' do
+        let(:user) { create :admin }
+
+        it 'should delete state' do
+          expect do
+            delete "/api/v1/states/#{tested.id}"
+          end.to change { State.count }.by(-1)
+          expect(JSON.parse(response.body)).to eq('result' => 'State deleted')
+        end
+      end
+
+      context 'regular user' do
+        it 'should delete state' do
+          expect do
+            delete "/api/v1/states/#{tested.id}"
+          end.not_to change { State.count }
+          expect(JSON.parse(response.body)['errors']).to include('not allowed')
+        end
       end
     end
   end

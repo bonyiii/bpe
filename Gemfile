@@ -36,6 +36,7 @@ gem 'jbuilder', '~> 2.5'
 # gem 'capistrano-rails', group: :development
 gem "schema_auto_foreign_keys"
 gem 'devise'
+gem 'pundit'
 
 gem 'grape'
 gem 'grape_on_rails_routes'

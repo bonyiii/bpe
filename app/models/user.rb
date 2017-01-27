@@ -9,4 +9,8 @@ class User < ApplicationRecord
 
   validates :first_name, presence: true
   validates :last_name, presence: true
+
+  def role?(role_name)
+    roles.where(name: role_name).exists?
+  end
 end
