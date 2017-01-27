@@ -68,6 +68,11 @@ describe Bpe::V1::States do
             'name' => designed.name
           )
       end
+
+      it 'should handle active record not found error ' do
+        get '/api/v1/states/923'
+        expect(JSON.parse(response.body)).to eq('error' => 'Record not found!')
+      end
     end
 
     context 'PUT /api/v1/states/:id' do
@@ -78,6 +83,11 @@ describe Bpe::V1::States do
         it 'should update state' do
           put "/api/v1/states/#{designed.id}", params: designed_params
           expect(JSON.parse(response.body)['state']['name']).to eq(designed_params[:name])
+        end
+
+        it 'validate handle not existing from state' do
+          put "/api/v1/states/#{designed.id}", params: { from_state_id: 212_323 }
+          expect(JSON.parse(response.body)['errors']).to eq('from_state' => ['Previous state not exists!'])
         end
       end
 

@@ -18,10 +18,6 @@ class Vehicle < ApplicationRecord
        methods: %i(has_next_state),
        include: { state: State.json(:index) })
 
-  def current_state_name
-    state.name
-  end
-
   def next_state?
     state.next_state.present?
   end

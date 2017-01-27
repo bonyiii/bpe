@@ -9,6 +9,7 @@ SimpleCov.start do
   add_filter '/app/channels/'
   add_filter '/app/jobs/'
   add_filter '/app/mailers/'
+  add_filter '/app/controllers/'
   minimum_coverage 90
   minimum_coverage_by_file 90
 end

@@ -9,9 +9,11 @@ module Bpe
         error_response message: 'Record not found!', status: 404
       end
 
+      # :nocov:
       rescue_from ActiveRecord::RecordInvalid do |error|
         error_response(message: { errors: error.record.errors }, status: 422)
       end
+      # :nocov:
 
       rescue_from Pundit::NotAuthorizedError do |error|
         error_response(message: { errors: error }, status: 403)
