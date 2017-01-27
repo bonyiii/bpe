@@ -20,6 +20,13 @@ module Bpe
           { vehicle: vehicle.render(:detail) }
         end
 
+        desc 'Read vehicle'
+        route_param :id do
+          get do
+            { vehicle: vehicle.render(:detail) }
+          end
+        end
+
         desc 'Update vehicle'
         route_param :id do
           params do

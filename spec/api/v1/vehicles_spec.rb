@@ -58,6 +58,19 @@ describe Bpe::V1::Vehicles do
     end
   end
 
+  context 'GET /api/v1/vehicles/:id' do
+    it 'should read vehicle details' do
+      put "/api/v1/vehicles/#{jaguar.id}"
+      expect(JSON.parse(response.body)['vehicle'])
+        .to eq(
+          'id' => jaguar.id,
+          'name' => jaguar.name,
+          'has_next_state' => jaguar.next_state?,
+          'state' => { 'id' => designed_state.id, 'name' => designed_state.name }
+        )
+    end
+  end
+
   context 'PUT /api/v1/vehicles/:id' do
     let(:jaguar_params) { { name: 'Kia' } }
     it 'should update vehicle' do
