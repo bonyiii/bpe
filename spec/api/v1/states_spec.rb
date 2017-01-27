@@ -91,7 +91,6 @@ describe Bpe::V1::States do
     context 'DELETE /api/v1/states/:id' do
       context 'admin user' do
         let(:user) { create :admin }
-
         it 'should delete state' do
           expect do
             delete "/api/v1/states/#{tested.id}"

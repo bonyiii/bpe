@@ -82,13 +82,28 @@ describe Bpe::V1::Vehicles do
     end
 
     context 'DELETE /api/v1/vehicles/:id' do
-      it 'should delete vehicle' do
-        delete "/api/v1/vehicles/#{jaguar.id}"
-        expect(JSON.parse(response.body)).to eq('result' => 'Vehicle deleted')
+      context 'admin user' do
+        let(:user) { create :admin }
+
+        it 'should delete vehicle' do
+          expect do
+            delete "/api/v1/vehicles/#{jaguar.id}"
+          end.to change { Vehicle.count }.by(-1)
+          expect(JSON.parse(response.body)).to eq('result' => 'Vehicle deleted')
+        end
+      end
+
+      context 'regular user' do
+        it 'should not delete vehicle' do
+          expect do
+            delete "/api/v1/vehicles/#{jaguar.id}"
+          end.not_to change { Vehicle.count }
+          expect(JSON.parse(response.body)['errors']).to include('not allowed')
+        end
       end
     end
 
-    context 'PUT /api/v1/vehicles/:id/next_designed_state' do
+    context 'PUT /api/v1/vehicles/:id/next_state' do
       let(:jaguar_params) { { name: 'Kia' } }
       it 'should update vehicle' do
         put "/api/v1/vehicles/#{jaguar.id}/next_state", params: jaguar_params

@@ -1,22 +1,24 @@
 # frozen_string_literal: true
-class StatePolicy < ApplicationPolicy
+class VehiclePolicy < ApplicationPolicy
   def index?
     true
   end
 
   def create?
-    return true if admin_user?
-    false
+    true
   end
 
   def update?
-    return true if admin_user?
-    false
+    true
   end
 
   def destroy?
     return true if admin_user?
     false
+  end
+
+  def next_state?
+    true
   end
 
   private

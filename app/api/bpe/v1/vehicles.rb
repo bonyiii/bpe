@@ -6,6 +6,7 @@ module Bpe
         desc 'Return all Vehicles'
         get do
           vehicles = Vehicle.all
+          authorize :vehicle, :index?
 
           { vehicles: vehicles.render(:index) }
         end
@@ -16,6 +17,7 @@ module Bpe
         end
         post do
           vehicle = Vehicle.create!(params)
+          authorize :vehicle, :create?
 
           { vehicle: vehicle.render(:detail) }
         end
@@ -24,6 +26,7 @@ module Bpe
         route_param :id do
           get do
             vehicle = Vehicle.find(params[:id])
+            authorize vehicle, :show?
 
             { vehicle: vehicle.render(:detail) }
           end
@@ -36,6 +39,7 @@ module Bpe
           end
           put do
             vehicle = Vehicle.find(params[:id])
+            authorize vehicle, :update?
             vehicle.update!(params)
 
             { vehicle: vehicle.render(:detail) }
@@ -46,6 +50,7 @@ module Bpe
         route_param :id do
           delete do
             vehicle = Vehicle.find(params[:id])
+            authorize vehicle, :destroy?
             vehicle.destroy!
 
             { result: 'Vehicle deleted' }.to_json
@@ -56,6 +61,7 @@ module Bpe
         route_param :id do
           put :next_state do
             vehicle = Vehicle.find(params[:id])
+            authorize vehicle, :next_state?
             vehicle.next_state!
 
             { vehicle: vehicle.render(:detail) }
