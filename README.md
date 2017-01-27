@@ -1,24 +1,22 @@
-# README
+[ ![Codeship Status for bonyiii/bpe](https://app.codeship.com/projects/c28302e0-c6c5-0134-be7a-7a0e44e66932/status?branch=master)](https://app.codeship.com/projects/198707)
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Setting up
 
-Things you may want to cover:
+* `bundle install` to get all required gems
+* `bundle exec rake db:create` to create the database
+* `bundle exec rake db:setup` to create the database schema and seed data
+* Set up your .env file.
 
-* Ruby version
+## Log in
 
-* System dependencies
+Two user seeded by default in the database:
 
-* Configuration
+* admin@test.hu 
+* user@test.hu 
 
-* Database creation
+both user's password: password.
 
-* Database initialization
+User admin@test.hu has admin role, so access everything, the other one has limited rights.
 
-* How to run the test suite
+Tha api can be tested with swagger which is available after login.
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
