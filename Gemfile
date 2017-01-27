@@ -39,6 +39,8 @@ gem 'devise'
 gem 'pundit'
 
 gem 'grape'
+gem 'grape-swagger'
+gem 'grape-swagger-rails'
 gem 'grape_on_rails_routes'
 gem 'hashie-forbidden_attributes'
 

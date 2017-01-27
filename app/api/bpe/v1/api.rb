@@ -35,6 +35,8 @@ module Bpe
 
       mount Bpe::V1::Vehicles
       mount Bpe::V1::States
+
+      add_swagger_documentation
     end
   end
 end
