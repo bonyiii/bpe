@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Bpe
   module V1
     class Api < Grape::API

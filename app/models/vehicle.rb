@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class Vehicle < ApplicationRecord
   belongs_to :state
 
@@ -9,7 +10,7 @@ class Vehicle < ApplicationRecord
 
   json(:index,
        only: %i(id name),
-       include: { state: State.json(:index)})
+       include: { state: State.json(:index) })
 
   def next_state?
     state.next.present?
@@ -29,10 +30,10 @@ class Vehicle < ApplicationRecord
 
   def valid_state_transition?
     return true unless state_id_changed?
-    if state.from_id != state_id_was
-      old_state = State.find(state_id_was)
-      errors.add(:state, 'Invalid transition from #{old_state.name} to #{state.name}')
-    end
+    return true if state.from_id == state_id_was
+
+    old_state = State.find(state_id_was)
+    errors.add(:state, "Invalid transition from #{old_state.name} to #{state.name}")
   end
 
   def initial_state

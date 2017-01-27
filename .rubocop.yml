@@ -9,3 +9,4 @@ Metrics/LineLength:
 Metrics/BlockLength:
   Exclude:
     - 'spec/**/*'
+    - 'app/api/**/*'

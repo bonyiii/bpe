@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class State < ApplicationRecord
   has_one :next, class_name: 'State', foreign_key: 'from_id'
   belongs_to :from, class_name: 'State'
