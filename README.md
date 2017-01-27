@@ -18,5 +18,13 @@ both user's password: password.
 
 User admin@test.hu has admin role, so access everything, the other one has limited rights.
 
-Tha api can be tested with swagger which is available after login.
+## Running
 
+`bundle exec rails s`
+
+This will run the Rails server on <http://localhost:3000> 
+
+## Explore API
+
+Once the server is running, you can access <http://localhost:3000/swagger>
+Tha api can be tested with swagger but only available after login.
