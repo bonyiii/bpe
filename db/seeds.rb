@@ -21,3 +21,18 @@ User.create_with(
   last_name: 'User',
   password: 'password'
 ).find_or_create_by!(email: 'user@test.com')
+
+
+designed_state = State.find_or_create_by!(name: 'designed')
+
+assembled_state = State.create_with(
+  from_state: designed_state
+).find_or_create_by!(name: 'assembled')
+
+painted_state = State.create_with(
+  from_state: assembled_state
+).find_or_create_by!(name: 'painted')
+
+tested_state = State.create_with(
+  from_state: painted_state
+).find_or_create_by!(name: 'tested')
