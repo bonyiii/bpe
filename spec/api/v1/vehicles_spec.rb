@@ -3,7 +3,7 @@ require 'rails_helper'
 
 describe Bpe::V1::Vehicles do
   let!(:designed_state) { create :state, name: 'designed' }
-  let!(:painted_state) { create :state, name: 'painted', from: designed_state }
+  let!(:painted_state) { create :state, name: 'painted', from_state: designed_state }
   let!(:jaguar) { create :vehicle, name: 'Jaguar' }
   let!(:bmw) { create :vehicle, name: 'Bmw' }
   let!(:ford) { create :vehicle, name: 'Ford' }

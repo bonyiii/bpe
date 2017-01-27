@@ -3,9 +3,9 @@ require 'rails_helper'
 
 describe Bpe::V1::States do
   let!(:designed) { create :state, name: 'designed' }
-  let!(:assembled) { create :state, name: 'assembled', from: designed }
-  let!(:painted) { create :state, name: 'painted', from: assembled }
-  let!(:tested) { create :state, name: 'tested', from: painted }
+  let!(:assembled) { create :state, name: 'assembled', from_state: designed }
+  let!(:painted) { create :state, name: 'painted', from_state: assembled }
+  let!(:tested) { create :state, name: 'tested', from_state: painted }
 
   context 'GET /api/v1/states' do
     it 'should return states' do

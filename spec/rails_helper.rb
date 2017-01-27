@@ -6,7 +6,10 @@ require 'simplecov'
 SimpleCov.start do
   load_profile 'rails'
   add_group 'Api', 'app/api'
-  minimum_coverage 95
+  add_filter '/app/channels/'
+  add_filter '/app/jobs/'
+  add_filter '/app/mailers/'
+  minimum_coverage 90
   minimum_coverage_by_file 90
 end
 

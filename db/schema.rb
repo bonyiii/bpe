@@ -46,10 +46,10 @@ ActiveRecord::Schema.define(version: 20170126154553) do
   end
 
   create_table "states", force: :cascade do |t|
-    t.string   "name",       :index=>{:name=>"index_states_on_name", :unique=>true, :using=>:btree}
-    t.integer  "from_id",    :foreign_key=>{:references=>"states", :name=>"fk_states_from_id", :on_update=>:no_action, :on_delete=>:no_action}, :index=>{:name=>"fk__states_from_id", :using=>:btree}
-    t.datetime "created_at", :null=>false
-    t.datetime "updated_at", :null=>false
+    t.string   "name",          :index=>{:name=>"index_states_on_name", :unique=>true, :using=>:btree}
+    t.integer  "from_state_id", :foreign_key=>{:references=>"states", :name=>"fk_states_from_state_id", :on_update=>:no_action, :on_delete=>:no_action}, :index=>{:name=>"fk__states_from_state_id", :using=>:btree}
+    t.datetime "created_at",    :null=>false
+    t.datetime "updated_at",    :null=>false
   end
 
   create_table "vehicles", force: :cascade do |t|

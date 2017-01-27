@@ -2,9 +2,9 @@
 require 'rails_helper'
 
 RSpec.describe Vehicle, type: :model do
-  let!(:assembled) { create :state, name: 'assembled', from: designed }
-  let!(:painted) { create :state, name: 'painted', from: assembled }
-  let!(:tested) { create :state, name: 'tested', from: painted }
+  let!(:assembled) { create :state, name: 'assembled', from_state: designed }
+  let!(:painted) { create :state, name: 'painted', from_state: assembled }
+  let!(:tested) { create :state, name: 'tested', from_state: painted }
   let!(:designed) { create :state, name: 'designed' }
   let(:vehicle) { create :vehicle }
 
@@ -17,7 +17,7 @@ RSpec.describe Vehicle, type: :model do
   end
 
   context 'state transitions' do
-    it 'allows from designed to assembled' do
+    it 'allows from_state designed to assembled' do
       subject.next_state!
       expect(subject.state).to eq(assembled)
     end
@@ -56,7 +56,7 @@ RSpec.describe Vehicle, type: :model do
     end
 
     context 'new states' do
-      let!(:released) { create :state, name: 'released', from: tested }
+      let!(:released) { create :state, name: 'released', from_state: tested }
 
       it 'should be reachable' do
         subject.update_attribute(:state_id, tested.id)

@@ -23,17 +23,17 @@ class Vehicle < ApplicationRecord
   end
 
   def next_state?
-    state.next.present?
+    state.next_state.present?
   end
   alias has_next_state next_state?
 
   def next_state!
-    if state.next.blank?
+    if state.next_state.blank?
       errors.add(:state, 'No more state transition available')
       return false
     end
 
-    self.state = state.next
+    self.state = state.next_state
     save!
   end
 
@@ -41,7 +41,7 @@ class Vehicle < ApplicationRecord
 
   def valid_state_transition?
     return true unless state_id_changed?
-    return true if state.from_id == state_id_was
+    return true if state.from_state_id == state_id_was
 
     old_state = State.find(state_id_was)
     errors.add(:state, "Invalid transition from #{old_state.name} to #{state.name}")
