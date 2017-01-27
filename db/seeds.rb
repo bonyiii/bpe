@@ -6,11 +6,15 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-User.create_with(
+admin_role = Role.find_or_create_by!(name: 'admin')
+
+admin = User.create_with(
   first_name: 'Main',
   last_name: 'Admin',
   password: 'password'
 ).find_or_create_by!(email: 'admin@test.com')
+
+admin.roles = [admin_role]
 
 User.create_with(
   first_name: 'First',
