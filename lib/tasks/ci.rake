@@ -30,7 +30,7 @@ namespace :ci do
   end
 
   def build_frontend
-    sh 'nvm use 6.9.4'
+    # sh 'nvm use 6.9.4'
     Rake::Task['project:build_frontend'].invoke
   end
 end
