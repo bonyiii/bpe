@@ -1,5 +1,6 @@
 const Vehicle = ({
   name,
+  has_next_state,
   state,
   onToNextStateClick
 }) => (
@@ -11,11 +12,13 @@ const Vehicle = ({
       {state.name}
     </td>
     <td>
-      <button
-          onClick={onToNextStateClick}
-      >
-        Next state
-      </button>
+      { has_next_state &&
+        <button
+            onClick={onToNextStateClick}
+        >
+          Next state
+        </button>
+      }
     </td>
   </tr>
 )
