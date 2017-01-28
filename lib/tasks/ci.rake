@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 require 'factory_girl_rails' if Rails.env.test?
 
+# rubocop:disable Metrics/BlockLength
 namespace :ci do
   desc 'Run CI Tasks'
   task build: :environment do
@@ -25,6 +26,10 @@ namespace :ci do
     else
       system("bundle exec rake factory_girl:lint RAILS_ENV='test'")
     end
+  end
+
+  def build_frontend
+    Rake::Task['project:build_frontend'].invoke
   end
 end
 
