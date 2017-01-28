@@ -1,4 +1,6 @@
-export const bpeStateIds = (state = [], action) => {
+import { combineReducers } from 'redux'
+
+const ids = (state = [], action) => {
   switch(action.type) {
   case 'FETCH_BPESTATES_SUCCESS':
     return action.response.result
@@ -7,7 +9,7 @@ export const bpeStateIds = (state = [], action) => {
   }
 }
 
-export const bpeStateById = (state = {}, action) => {
+const byId = (state = {}, action) => {
   if (action.response) {
     return {
         ...state,
@@ -16,5 +18,12 @@ export const bpeStateById = (state = {}, action) => {
   }
   return state
 }
+
+const bpeStates = combineReducers({
+  ids,
+  byId
+})
+
+export default bpeStates
 
 export const getBpeState = (state, id) => state[id]

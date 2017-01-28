@@ -21,9 +21,9 @@ class BpeStates extends Component {
 
   render() {
     const { bpeStates } = this.props
+    // console.log(bpeStates)
     return(
       <ul>
-      {console.log(bpeStates)}
       {bpeStates.map( state =>
         <State
             key={state.id}
@@ -37,7 +37,7 @@ class BpeStates extends Component {
 
 const mapStateToProps = (state, { params }) => {
   return {
-    bpeStates: getBpeStates(state)
+    bpeStates: getBpeStates(state.bpeStates)
   }
 }
 

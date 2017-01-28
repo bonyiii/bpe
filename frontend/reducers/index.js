@@ -1,16 +1,15 @@
 import { combineReducers } from 'redux'
-import { bpeStateIds, bpeStateById, getBpeState } from './bpe_states'
+import bpeStates, { getBpeState } from './bpe_states'
 
 const bpeReducer = combineReducers({
-  bpeStateIds,
-  bpeStateById
+  bpeStates
 })
 
 export default bpeReducer
 
 export const getBpeStates = (state) => {
-  const ids = state.bpeStateIds
+  const ids = state.ids
   return ids.map((id) => {
-    return getBpeState(state.bpeStateById, id)
+    return getBpeState(state.byId, id)
   })
 }
