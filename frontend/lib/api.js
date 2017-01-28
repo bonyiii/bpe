@@ -12,3 +12,7 @@ export const toNextState = (id) => (
     type: 'PUT'
   })
 )
+
+export const addVehicle = (name) => (
+  jQuery.post('/api/v1/vehicles', { name: name})
+)

@@ -64,3 +64,24 @@ export const toNextState = (id) => (dispatch, getState) => {
     }
   )
 }
+
+export const addVehicle = (name) => (dispatch, getState) => {
+  dispatch({
+    type: 'ADD_VEHICLE_REQUEST'
+  })
+
+  return api.addVehicle(name).then(
+    response => {
+      dispatch({
+        type: 'ADD_VEHICLE_SUCCESS',
+        response: normalize(response['vehicle'], schema.vehicleEntity)
+      })
+    },
+    error => {
+      dispatch({
+        type: 'ADD_VEHICLE_FAILURE',
+        message: error.message || 'Something went wrong.'
+      })
+    }
+  )
+}

@@ -4,6 +4,7 @@ import { withRouter } from 'react-router'
 
 import * as actions from '../actions'
 import { getVehicles } from '../reducers'
+import AddVehicle from './add_vehicle.jsx'
 import Vehicle from './vehicle.jsx'
 
 class Vehicles extends Component {
@@ -24,24 +25,27 @@ class Vehicles extends Component {
     const { vehicles, toNextState } = this.props
     // console.log(Vehicles)
     return(
-      <table>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>State</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {vehicles.map( vehicle =>
-            <Vehicle
-                key={vehicle.id}
-                onToNextStateClick={() => toNextState(vehicle.id)}
-                {...vehicle}
-            />
-           )}
-        </tbody>
-      </table>
+      <div>
+        <AddVehicle/>
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>State</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {vehicles.map( vehicle =>
+              <Vehicle
+                  key={vehicle.id}
+                  onToNextStateClick={() => toNextState(vehicle.id)}
+                  {...vehicle}
+              />
+             )}
+          </tbody>
+        </table>
+      </div>
     )
   }
 }
