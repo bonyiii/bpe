@@ -31,4 +31,5 @@ Tha api can be tested with swagger but only available after login.
 
 ## Heroku
 
-The app deployed to http://bpeboni.herokuapp.com/swagger
+The app deployed to: http://bpeboni.herokuapp.com/
+The api explorer can be found here: http://bpeboni.herokuapp.com/swagger
