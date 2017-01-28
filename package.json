@@ -4,6 +4,9 @@
     "start": "webpack --progress --color --cache --watch",
     "build": "webpack",
     "test": "echo \"Error: no test specified\" && exit 1"
+    "engines": {
+      "node": "6.9.4"
+    }
   },
   "dependencies": {
     "babel-core": "^6.18.0",
