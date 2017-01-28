@@ -3,7 +3,7 @@
   "scripts": {
     "start": "webpack --progress --color --cache --watch",
     "build": "webpack",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
     "engines": {
       "node": "6.9.4"
     }
