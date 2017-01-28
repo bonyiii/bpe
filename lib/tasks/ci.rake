@@ -1,9 +1,11 @@
 # frozen_string_literal: true
 require 'factory_girl_rails' if Rails.env.test?
 
+# rubocop:disable Metrics/BlockLength
 namespace :ci do
   desc 'Run CI Tasks'
   task build: :environment do
+    build_frontend
     Rake::Task['ci:factory_lint'].invoke
     sh 'rubocop app lib spec config'
     sh 'rubycritic app lib --no-browser -f json'
@@ -25,6 +27,11 @@ namespace :ci do
     else
       system("bundle exec rake factory_girl:lint RAILS_ENV='test'")
     end
+  end
+
+  def build_frontend
+    # sh 'nvm use 6.9.4'
+    Rake::Task['project:build_frontend'].invoke
   end
 end
 
