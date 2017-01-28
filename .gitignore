@@ -21,5 +21,7 @@
 .byebug_history
 
 gems
+node_modules
+npm-debug.log
 coverage
 .env
