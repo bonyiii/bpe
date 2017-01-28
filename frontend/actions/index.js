@@ -43,3 +43,24 @@ export const fetchVehicles = () => (dispatch, getState) => {
     }
   )
 }
+
+export const toNextState = (id) => (dispatch, getState) => {
+  dispatch({
+    type: 'NEXT_STATE_REQUEST'
+  })
+
+  return api.toNextState(id).then(
+    response => {
+      dispatch({
+        type: 'NEXT_STATE_SUCCESS',
+        response: normalize(response['vehicle'], schema.vehicleEntity)
+      })
+    },
+    error => {
+      dispatch({
+        type: 'NEXT_STATE_FAILURE',
+        message: error.message || 'Something went wrong.'
+      })
+    }
+  )
+}

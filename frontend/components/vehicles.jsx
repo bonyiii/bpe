@@ -21,17 +21,27 @@ class Vehicles extends Component {
   }
 
   render() {
-    const { vehicles } = this.props
+    const { vehicles, toNextState } = this.props
     // console.log(Vehicles)
     return(
-      <ul>
-        {vehicles.map( state =>
-          <Vehicle
-              key={state.id}
-              {...state}
-          />
-         )}
-      </ul>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>State</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {vehicles.map( vehicle =>
+            <Vehicle
+                key={vehicle.id}
+                onToNextStateClick={() => toNextState(vehicle.id)}
+                {...vehicle}
+            />
+           )}
+        </tbody>
+      </table>
     )
   }
 }
