@@ -22,3 +22,24 @@ export const fetchBpeStates = () => (dispatch, getState) => {
     }
   )
 }
+
+export const fetchVehicles = () => (dispatch, getState) => {
+  dispatch({
+    type: 'FETCH_VEHICLE_REQUEST'
+  })
+
+  return api.fetchVehicles().then(
+    response => {
+      dispatch({
+        type: 'FETCH_VEHICLE_SUCCESS',
+        response: normalize(response['vehicles'], schema.vehicleArray)
+      })
+    },
+    error => {
+      dispatch({
+        type: 'FETCH_VEHICLE_FAILURE',
+        message: error.message || 'Something went wrong.'
+      })
+    }
+  )
+}

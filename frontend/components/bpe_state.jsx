@@ -1,4 +1,4 @@
-const State = ({
+const BpeState = ({
   name
 }) => (
   <li>
@@ -6,4 +6,4 @@ const State = ({
   </li>
 )
 
-export default State
+export default BpeState

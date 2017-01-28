@@ -3,10 +3,10 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
 
 import * as actions from '../actions'
-import { getBpeStates } from '../reducers'
-import BpeState from './bpe_state.jsx'
+import { getVehicles } from '../reducers'
+import Vehicle from './vehicle.jsx'
 
-class BpeStates extends Component {
+class Vehicles extends Component {
   componentDidMount() {
     this.fetchData()
   }
@@ -16,17 +16,17 @@ class BpeStates extends Component {
   }
 
   fetchData() {
-    const { fetchBpeStates } = this.props
-    fetchBpeStates().then(response => console.log(response, "fetchBpeStates done!"))
+    const { fetchVehicles } = this.props
+    fetchVehicles().then(response => console.log(response, "fetch vehicles done!"))
   }
 
   render() {
-    const { bpeStates } = this.props
-    // console.log(bpeStates)
+    const { vehicles } = this.props
+    // console.log(Vehicles)
     return(
       <ul>
-        {bpeStates.map( state =>
-          <BpeState
+        {vehicles.map( state =>
+          <Vehicle
               key={state.id}
               {...state}
           />
@@ -38,13 +38,13 @@ class BpeStates extends Component {
 
 const mapStateToProps = (state, { params }) => {
   return {
-    bpeStates: getBpeStates(state.bpeStates)
+    vehicles: getVehicles(state.vehicles)
   }
 }
 
-BpeStates = withRouter(connect(
+Vehicles = withRouter(connect(
   mapStateToProps,
   actions
-)(BpeStates))
+)(Vehicles))
 
-export default BpeStates
+export default Vehicles

@@ -9,4 +9,5 @@ Rails.application.routes.draw do
   end
 
   root to: 'welcome#index'
+  get '/*frontend', to: 'welcome#index'
 end
