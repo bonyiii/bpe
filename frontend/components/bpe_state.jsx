@@ -1,9 +1,16 @@
 const BpeState = ({
-  name
+  name,
+  from_state
 }) => (
-  <li>
-    {name}
-  </li>
+  <tr>
+    <td>
+      {name}
+    </td>
+    <td>
+      {' <- '}
+      {!!from_state && from_state.name}
+    </td>
+  </tr>
 )
 
 export default BpeState

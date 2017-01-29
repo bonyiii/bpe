@@ -16,3 +16,7 @@ export const toNextState = (id) => (
 export const addVehicle = (name) => (
   jQuery.post('/api/v1/vehicles', { name: name})
 )
+
+export const addBpeState = (changeset) => (
+  jQuery.post('/api/v1/states', changeset)
+)

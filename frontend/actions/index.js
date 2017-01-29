@@ -2,6 +2,15 @@ import { normalize } from 'normalizr'
 import * as schema from './schema'
 import * as api from '../lib/api'
 
+const handleError = (error, dispatch, type) => {
+  error => {
+    dispatch({
+      type: type,
+      message: error.message || 'Something went wrong.'
+    })
+  }
+}
+
 export const fetchBpeStates = () => (dispatch, getState) => {
   dispatch({
     type: 'FETCH_BPESTATES_REQUEST'
@@ -14,12 +23,7 @@ export const fetchBpeStates = () => (dispatch, getState) => {
         response: normalize(response['states'], schema.stateArray)
       })
     },
-    error => {
-      dispatch({
-        type: 'FETCH_BPESTATES_FAILURE',
-        message: error.message || 'Something went wrong.'
-      })
-    }
+    error => handleError(error, dispatch, 'FETCH_BPESTATES_FAILURE')
   )
 }
 
@@ -35,12 +39,7 @@ export const fetchVehicles = () => (dispatch, getState) => {
         response: normalize(response['vehicles'], schema.vehicleArray)
       })
     },
-    error => {
-      dispatch({
-        type: 'FETCH_VEHICLE_FAILURE',
-        message: error.message || 'Something went wrong.'
-      })
-    }
+    error => handleError(error, dispatch, 'FETCH_VEHICLE_FAILURE')
   )
 }
 
@@ -56,12 +55,7 @@ export const toNextState = (id) => (dispatch, getState) => {
         response: normalize(response['vehicle'], schema.vehicleEntity)
       })
     },
-    error => {
-      dispatch({
-        type: 'NEXT_STATE_FAILURE',
-        message: error.message || 'Something went wrong.'
-      })
-    }
+    error => handleError(error, dispatch, 'NEXT_STATE_FAILURE')
   )
 }
 
@@ -77,11 +71,22 @@ export const addVehicle = (name) => (dispatch, getState) => {
         response: normalize(response['vehicle'], schema.vehicleEntity)
       })
     },
-    error => {
+    error => handleError(error, dispatch, 'ADD_VEHICLE_FAILURE')
+  )
+}
+
+export const addBpeState = (changeset) => (dispatch, getState) => {
+  dispatch({
+    type: 'ADD_BPESTATE_REQUEST'
+  })
+
+  return api.addBpeState(changeset).then(
+    response => {
       dispatch({
-        type: 'ADD_VEHICLE_FAILURE',
-        message: error.message || 'Something went wrong.'
+        type: 'ADD_BPESTATE_SUCCESS',
+        response: normalize(response['state'], schema.stateEntity)
       })
-    }
+    },
+    error => handleError(error, dispatch, 'ADD_BPESTATE_FAILURE')
   )
 }

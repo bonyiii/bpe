@@ -50,6 +50,8 @@ ActiveRecord::Schema.define(version: 20170126154553) do
     t.integer  "from_state_id", :foreign_key=>{:references=>"states", :name=>"fk_states_from_state_id", :on_update=>:no_action, :on_delete=>:no_action}, :index=>{:name=>"fk__states_from_state_id", :using=>:btree}
     t.datetime "created_at",    :null=>false
     t.datetime "updated_at",    :null=>false
+
+    t.index ["from_state_id"], :name=>"index_states_on_from_state_id", :unique=>true, :using=>:btree
   end
 
   create_table "vehicles", force: :cascade do |t|

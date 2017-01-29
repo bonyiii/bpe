@@ -8,5 +8,6 @@ class CreateStates < ActiveRecord::Migration[5.0]
     end
 
     add_index :states, :name, unique: true
+    add_index :states, :from_state_id, unique: true
   end
 end

@@ -4,6 +4,8 @@ const ids = (state = [], action) => {
   switch(action.type) {
   case 'FETCH_BPESTATES_SUCCESS':
     return action.response.result
+  case 'ADD_BPESTATE_SUCCESS':
+    return [...state, action.response.result]
   default:
     return state
   }

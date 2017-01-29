@@ -5,6 +5,7 @@ import { withRouter } from 'react-router'
 import * as actions from '../actions'
 import { getBpeStates } from '../reducers'
 import BpeState from './bpe_state.jsx'
+import AddBpeState from './add_bpe_state.jsx'
 
 class BpeStates extends Component {
   componentDidMount() {
@@ -22,16 +23,27 @@ class BpeStates extends Component {
 
   render() {
     const { bpeStates } = this.props
-    // console.log(bpeStates)
+    //console.log(bpeStates)
     return(
-      <ul>
-        {bpeStates.map( state =>
-          <BpeState
-              key={state.id}
-              {...state}
-          />
-         )}
-      </ul>
+      <div>
+        <AddBpeState {...this.props} />
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>From State</th>
+            </tr>
+          </thead>
+          <tbody>
+            {bpeStates.map( state =>
+              <BpeState
+                  key={state.id}
+                  {...state}
+              />
+             )}
+          </tbody>
+        </table>
+      </div>
     )
   }
 }
