@@ -1,5 +1,5 @@
 {
-  "name": "my_devise_token_auth",
+  "name": "bpe",
   "scripts": {
     "start": "webpack --progress --color --cache --watch",
     "build": "webpack",

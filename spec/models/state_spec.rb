@@ -7,6 +7,8 @@ RSpec.describe State, type: :model do
   let(:tested) { create :state, name: 'tested', from_state: painted }
   let(:designed) { create :state, name: 'designed' }
 
+  it { should validate_presence_of(:name) }
+
   it 'should keep reference' do
     expect(tested.from_state).to eq(painted)
   end
@@ -17,6 +19,13 @@ RSpec.describe State, type: :model do
         assembled
         expect(State.initial).to eq(designed)
       end
+    end
+  end
+
+  describe '#destroy' do
+    it 'should not destroy if dependent state exists' do
+      assembled
+      expect(designed.destroy).to be(false)
     end
   end
 end

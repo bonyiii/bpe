@@ -1,3 +1,7 @@
+export const fetchCurrentUser = () => (
+  jQuery.get('/api/v1/users')
+)
+
 export const fetchBpeStates = () => (
   jQuery.get('/api/v1/states')
 )
@@ -15,4 +19,30 @@ export const toNextState = (id) => (
 
 export const addVehicle = (name) => (
   jQuery.post('/api/v1/vehicles', { name: name})
+)
+
+export const deleteVehicle = (id) => (
+  jQuery.ajax({
+    url: `/api/v1/vehicles/${id}`,
+    type: 'DELETE'
+  })
+)
+
+export const addBpeState = (changeset) => (
+  jQuery.post('/api/v1/states', changeset)
+)
+
+export const updateBpeState = (changeset) => (
+  jQuery.ajax({
+    url: `/api/v1/states/${changeset.id}`,
+    type: 'PUT',
+    data: changeset
+  })
+)
+
+export const deleteBpeState = (id) => (
+  jQuery.ajax({
+    url: `/api/v1/states/${id}`,
+    type: 'DELETE'
+  })
 )

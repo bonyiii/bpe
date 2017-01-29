@@ -10,7 +10,7 @@ module Bpe
       end
 
       # :nocov:
-      rescue_from ActiveRecord::RecordInvalid do |error|
+      rescue_from ActiveRecord::RecordInvalid, ActiveRecord::RecordNotDestroyed do |error|
         error_response(message: { errors: error.record.errors }, status: 422)
       end
       # :nocov:
@@ -37,6 +37,7 @@ module Bpe
 
       mount Bpe::V1::Vehicles
       mount Bpe::V1::States
+      mount Bpe::V1::Users
 
       add_swagger_documentation
     end

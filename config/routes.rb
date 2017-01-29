@@ -8,6 +8,12 @@ Rails.application.routes.draw do
     mount GrapeSwaggerRails::Engine => '/swagger'
   end
 
+  unauthenticated :user do
+    devise_scope :user do
+      root 'devise/sessions#new', as: :unauthenticated_root
+    end
+  end
+
   root to: 'welcome#index'
   get '/*frontend', to: 'welcome#index'
 end
