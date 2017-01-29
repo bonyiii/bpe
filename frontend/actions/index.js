@@ -75,6 +75,23 @@ export const addVehicle = (name) => (dispatch, getState) => {
   )
 }
 
+export const deleteVehicle = (id) => (dispatch, getState) => {
+  dispatch({
+    type: 'DELETE_VEHICLE_REQUEST'
+  })
+
+  return api.deleteVehicle(id).then(
+    response => {
+      dispatch({
+        type: 'DELETE_VEHICLE_SUCCESS',
+        id
+      })
+    },
+    error => handleError(error, dispatch, 'DELETE_VEHICLE_FAILURE')
+  )
+}
+
+
 export const addBpeState = (changeset) => (dispatch, getState) => {
   dispatch({
     type: 'ADD_BPESTATE_REQUEST'
@@ -88,5 +105,21 @@ export const addBpeState = (changeset) => (dispatch, getState) => {
       })
     },
     error => handleError(error, dispatch, 'ADD_BPESTATE_FAILURE')
+  )
+}
+
+export const deleteBpeState = (id) => (dispatch, getState) => {
+  dispatch({
+    type: 'DELETE_BPESTATE_REQUEST'
+  })
+
+  return api.deleteBpeState(id).then(
+    response => {
+      dispatch({
+        type: 'DELETE_BPESTATE_SUCCESS',
+        id
+      })
+    },
+    error => handleError(error, dispatch, 'DELETE_BPESTATE_FAILURE')
   )
 }

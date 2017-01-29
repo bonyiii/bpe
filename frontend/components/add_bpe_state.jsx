@@ -17,19 +17,23 @@ let AddBpeState = ({
           onKeyPress={ (e) => {
               if (e.key === "Enter") {
                 dispatch(addBpeState({
-                  namme: input.value,
-                  from_state: select.value
+                  name: input.value,
+                  from_state_id: select.value
                 }))
                 input.value = ""
               }
             }}
       />
-      <select ref={ node => select = node }>
-        <option></option>
+      <select ref={ node => { select = node } }>
         {
           bpeStates.map(
             state =>
-              <option key={state.id} value={state.id}>{state.name}</option>
+              <option
+                  key={state.id}
+                  value={state.id}
+              >
+                {state.name}
+              </option>
           )
         }
       </select>

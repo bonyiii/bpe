@@ -38,6 +38,7 @@ class BpeStates extends Component {
             {bpeStates.map( state =>
               <BpeState
                   key={state.id}
+                  bpeStates={bpeStates}
                   {...state}
               />
              )}

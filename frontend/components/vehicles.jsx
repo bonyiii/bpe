@@ -22,7 +22,7 @@ class Vehicles extends Component {
   }
 
   render() {
-    const { vehicles, toNextState } = this.props
+    const { vehicles, toNextState, deleteVehicle } = this.props
     // console.log(Vehicles)
     return(
       <div>
@@ -40,6 +40,7 @@ class Vehicles extends Component {
               <Vehicle
                   key={vehicle.id}
                   onToNextStateClick={() => toNextState(vehicle.id)}
+                  deleteVehicle={() => deleteVehicle(vehicle.id)}
                   {...vehicle}
               />
              )}
