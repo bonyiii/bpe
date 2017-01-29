@@ -3,7 +3,8 @@ const Vehicle = ({
   has_next_state,
   state,
   onToNextStateClick,
-  deleteVehicle
+  deleteVehicle,
+  currentUser
 }) => (
   <tr>
     <td>
@@ -16,7 +17,7 @@ const Vehicle = ({
       { has_next_state &&
         <button onClick={onToNextStateClick}>Next state</button>
       }
-    <button onClick={deleteVehicle}>Delete</button>
+    { currentUser.is_admin ? <button onClick={deleteVehicle}>Delete</button> : '' }
     </td>
   </tr>
 )

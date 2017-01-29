@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
 
 import * as actions from '../actions'
-import { getBpeStates } from '../reducers'
+import { getBpeStates, getCurrentUser } from '../reducers'
 import BpeState from './bpe_state.jsx'
 import AddBpeState from './add_bpe_state.jsx'
 
@@ -12,21 +12,21 @@ class BpeStates extends Component {
     this.fetchData()
   }
 
-  componentDidUpdate(prevProps) {
-    //    this.fetchData()
-  }
-
   fetchData() {
-    const { fetchBpeStates } = this.props
+    const { fetchBpeStates, fetchCurrentUser, currentUser } = this.props
+    if (!currentUser || currentUser != {}) {
+      fetchCurrentUser().then(response => console.log(response, "fetch user done!"))
+    }
     fetchBpeStates().then(response => console.log(response, "fetchBpeStates done!"))
   }
 
   render() {
     const { bpeStates } = this.props
+    const currentUser = this.props.currentUser || {}
     //console.log(bpeStates)
     return(
       <div>
-        <AddBpeState {...this.props} />
+        {currentUser.is_admin && <AddBpeState {...this.props} />}
         <table>
           <thead>
             <tr>
@@ -40,6 +40,7 @@ class BpeStates extends Component {
               <BpeState
                   key={state.id}
                   bpeStates={bpeStates}
+                  currentUser={currentUser}
                   {...state}
               />
              )}
@@ -52,10 +53,10 @@ class BpeStates extends Component {
 
 const mapStateToProps = (state, { params }) => {
   return {
-    bpeStates: getBpeStates(state.bpeStates)
+    bpeStates: getBpeStates(state),
+    currentUser: getCurrentUser(state)
   }
 }
-
 BpeStates = withRouter(connect(
   mapStateToProps,
   actions

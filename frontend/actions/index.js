@@ -11,6 +11,22 @@ const handleError = (error, dispatch, type) => {
   }
 }
 
+export const fetchCurrentUser = () => (dispatch, getState) => {
+  dispatch({
+    type: 'FETCH_CURRENT_USER_REQUEST'
+  })
+
+  return api.fetchCurrentUser().then(
+    response => {
+      dispatch({
+        type: 'FETCH_CURRENT_USER_SUCCESS',
+        response: normalize(response['user'], schema.userEntity)
+      })
+    },
+    error => handleError(error, dispatch, 'FETCH_CURRENT_USER_FAILURE')
+  )
+}
+
 export const fetchBpeStates = () => (dispatch, getState) => {
   dispatch({
     type: 'FETCH_BPESTATES_REQUEST'

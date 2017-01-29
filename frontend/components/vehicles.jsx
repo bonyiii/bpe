@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
 
 import * as actions from '../actions'
-import { getVehicles } from '../reducers'
+import { getVehicles, getCurrentUser } from '../reducers'
 import AddVehicle from './add_vehicle.jsx'
 import Vehicle from './vehicle.jsx'
 
@@ -12,17 +12,17 @@ class Vehicles extends Component {
     this.fetchData()
   }
 
-  componentDidUpdate(prevProps) {
-    //    this.fetchData()
-  }
-
   fetchData() {
-    const { fetchVehicles } = this.props
+    const { fetchVehicles, fetchCurrentUser, currentUser } = this.props
+    if (!currentUser || currentUser != {}) {
+      fetchCurrentUser().then(response => console.log(response, "fetch user done!"))
+    }
     fetchVehicles().then(response => console.log(response, "fetch vehicles done!"))
   }
 
   render() {
     const { vehicles, toNextState, deleteVehicle } = this.props
+    const currentUser = this.props.currentUser || {}
     // console.log(Vehicles)
     return(
       <div>
@@ -41,6 +41,7 @@ class Vehicles extends Component {
                   key={vehicle.id}
                   onToNextStateClick={() => toNextState(vehicle.id)}
                   deleteVehicle={() => deleteVehicle(vehicle.id)}
+                  currentUser={currentUser}
                   {...vehicle}
               />
              )}
@@ -53,7 +54,8 @@ class Vehicles extends Component {
 
 const mapStateToProps = (state, { params }) => {
   return {
-    vehicles: getVehicles(state.vehicles)
+    vehicles: getVehicles(state),
+    currentUser: getCurrentUser(state)
   }
 }
 

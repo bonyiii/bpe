@@ -1,3 +1,7 @@
+export const fetchCurrentUser = () => (
+  jQuery.get('/api/v1/users')
+)
+
 export const fetchBpeStates = () => (
   jQuery.get('/api/v1/states')
 )
