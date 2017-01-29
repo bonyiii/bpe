@@ -25,6 +25,7 @@ let AddBpeState = ({
             }}
       />
       <select ref={ node => { select = node } }>
+        <option></option>
         {
           bpeStates.map(
             state =>

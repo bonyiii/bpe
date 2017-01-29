@@ -108,6 +108,23 @@ export const addBpeState = (changeset) => (dispatch, getState) => {
   )
 }
 
+export const updateBpeState = (changeset) => (dispatch, getState) => {
+  dispatch({
+    type: 'UPDATE_BPESTATE_REQUEST'
+  })
+
+  return api.updateBpeState(changeset).then(
+    response => {
+      dispatch({
+        type: 'UPDATE_BPESTATE_SUCCESS',
+        response: normalize(response['state'], schema.stateEntity)
+      })
+    },
+    error => handleError(error, dispatch, 'UPDATE_BPESTATE_FAILURE')
+  )
+}
+
+
 export const deleteBpeState = (id) => (dispatch, getState) => {
   dispatch({
     type: 'DELETE_BPESTATE_REQUEST'

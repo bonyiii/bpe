@@ -28,6 +28,14 @@ export const addBpeState = (changeset) => (
   jQuery.post('/api/v1/states', changeset)
 )
 
+export const updateBpeState = (changeset) => (
+  jQuery.ajax({
+    url: `/api/v1/states/${changeset.id}`,
+    type: 'PUT',
+    data: changeset
+  })
+)
+
 export const deleteBpeState = (id) => (
   jQuery.ajax({
     url: `/api/v1/states/${id}`,

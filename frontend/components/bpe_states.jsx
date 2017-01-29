@@ -32,6 +32,7 @@ class BpeStates extends Component {
             <tr>
               <th>Name</th>
               <th>From State</th>
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>
