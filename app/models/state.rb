@@ -2,8 +2,11 @@
 class State < ApplicationRecord
   has_one :next_state, class_name: 'State', foreign_key: 'from_state_id'
   belongs_to :from_state, class_name: 'State'
+  has_many :vehicles, dependent: :destroy
 
-  validates :from_state, presence: { allow_blank: true }, uniqueness: true
+  validates :from_state,
+            presence: { allow_blank: true },
+            uniqueness: { allow_blank: true }
   validates :name, presence: true
   validate :validate_from_state_id
 
