@@ -59,7 +59,7 @@ module Bpe
         route_param :id do
           delete do
             state = State.find(params[:id])
-            authorize :state, :destroy?
+            authorize state, :destroy?
             state.destroy!
 
             { result: 'State deleted' }.to_json

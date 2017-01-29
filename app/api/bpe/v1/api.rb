@@ -10,7 +10,7 @@ module Bpe
       end
 
       # :nocov:
-      rescue_from ActiveRecord::RecordInvalid do |error|
+      rescue_from ActiveRecord::RecordInvalid, ActiveRecord::RecordNotDestroyed do |error|
         error_response(message: { errors: error.record.errors }, status: 422)
       end
       # :nocov:

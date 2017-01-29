@@ -21,4 +21,11 @@ RSpec.describe State, type: :model do
       end
     end
   end
+
+  describe '#destroy' do
+    it 'should not destroy if dependent state exists' do
+      assembled
+      expect(designed.destroy).to be(false)
+    end
+  end
 end
