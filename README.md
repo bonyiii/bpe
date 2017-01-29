@@ -5,6 +5,7 @@
 * `bundle install` to get all required gems
 * `bundle exec rake db:create` to create the database
 * `bundle exec rake db:setup` to create the database schema and seed data
+* `npm install` or `yarn` to install node modules
 * Set up your .env file.
 
 ## Log in
@@ -20,7 +21,9 @@ User admin@test.com has admin role, so access everything, the other one has limi
 
 ## Running
 
+`npm start` or `npm run build` to create js assets
 `bundle exec rails s`
+
 
 This will run the Rails server on <http://localhost:3000> 
 
