@@ -20,7 +20,7 @@ export const fetchCurrentUser = () => (dispatch, getState) => {
     response => {
       dispatch({
         type: 'FETCH_CURRENT_USER_SUCCESS',
-        response: normalize(response['user'], schema.userEntity)
+        currentUser: response['user']
       })
     },
     error => handleError(error, dispatch, 'FETCH_CURRENT_USER_FAILURE')
