@@ -46,3 +46,17 @@ export const deleteBpeState = (id) => (
     type: 'DELETE'
   })
 )
+
+export const upBpeState = (id) => (
+  jQuery.ajax({
+    url: `/api/v1/states/${id}/up`,
+    type: 'PUT',
+  })
+)
+
+export const downBpeState = (id) => (
+  jQuery.ajax({
+    url: `/api/v1/states/${id}/down`,
+    type: 'PUT',
+  })
+)

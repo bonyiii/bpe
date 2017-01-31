@@ -6,6 +6,7 @@ import * as actions from '../actions'
 import { getBpeStates, getCurrentUser } from '../reducers'
 import BpeState from './bpe_state.jsx'
 import AddBpeState from './add_bpe_state.jsx'
+import { fetchUserNeeded } from '../lib/helpers'
 
 class BpeStates extends Component {
   componentDidMount() {
@@ -14,15 +15,14 @@ class BpeStates extends Component {
 
   fetchData() {
     const { fetchBpeStates, fetchCurrentUser, currentUser } = this.props
-    if (!currentUser || currentUser != {}) {
+    if (fetchUserNeeded(currentUser)) {
       fetchCurrentUser().then(response => console.log(response, "fetch user done!"))
     }
     fetchBpeStates().then(response => console.log(response, "fetchBpeStates done!"))
   }
 
   render() {
-    const { bpeStates } = this.props
-    const currentUser = this.props.currentUser || {}
+    const { bpeStates, currentUser } = this.props
     //console.log(bpeStates)
     return(
       <div>
@@ -30,6 +30,7 @@ class BpeStates extends Component {
         <table>
           <thead>
             <tr>
+              <th>Order</th>
               <th>Name</th>
               <th>From State</th>
               <th>Actions</th>

@@ -14,10 +14,20 @@ RSpec.describe State, type: :model do
   end
 
   context 'scopes' do
-    context 'initial' do
+    describe '#initial' do
       it 'should return the default state' do
         assembled
         expect(State.initial).to eq(designed)
+      end
+    end
+
+    describe '#list' do
+      it 'should return states in proper hierarchy' do
+        assembled
+        painted
+        tested
+        designed
+        expect(State.list.map(&:id)).to eq([designed.id, assembled.id, painted.id, tested.id])
       end
     end
   end

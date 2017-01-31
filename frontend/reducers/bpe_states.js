@@ -3,6 +3,8 @@ import { combineReducers } from 'redux'
 const ids = (state = [], action) => {
   switch(action.type) {
   case 'FETCH_BPESTATES_SUCCESS':
+  case 'UP_BPESTATE_SUCCESS':
+  case 'DOWN_BPESTATE_SUCCESS':
     return action.response.result
   case 'ADD_BPESTATE_SUCCESS':
     return [...state, action.response.result]

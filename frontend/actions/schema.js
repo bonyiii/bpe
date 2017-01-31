@@ -5,5 +5,3 @@ export const stateArray = new schema.Array(stateEntity)
 
 export const vehicleEntity = new schema.Entity('vehicles')
 export const vehicleArray = new schema.Array(vehicleEntity)
-
-export const userEntity = new schema.Entity('users')

@@ -122,6 +122,74 @@ describe Bpe::V1::States do
         end
       end
     end
+
+    context 'PUT /api/v1/states/:id/up' do
+      let(:user) { create :admin }
+
+      it 'should move state up one position when no grandparent state exists' do
+        put "/api/v1/states/#{assembled.id}/up"
+        expect(response.status).to eq(200)
+
+        expect(assembled.reload.from_state_id).to eq(nil)
+        expect(designed.reload.from_state_id).to eq(assembled.id)
+        expect(painted.reload.from_state_id).to eq(designed.id)
+        expect(tested.reload.from_state_id).to eq(painted.id)
+      end
+
+      it 'should move state up one position' do
+        put "/api/v1/states/#{painted.id}/up"
+        expect(response.status).to eq(200)
+
+        expect(designed.reload.from_state_id).to eq(nil)
+        expect(painted.reload.from_state_id).to eq(designed.id)
+        expect(assembled.reload.from_state_id).to eq(painted.id)
+        expect(tested.reload.from_state_id).to eq(assembled.id)
+      end
+
+      it 'should move state up one position when no child state exist' do
+        put "/api/v1/states/#{tested.id}/up"
+        expect(response.status).to eq(200)
+
+        expect(designed.reload.from_state_id).to eq(nil)
+        expect(assembled.reload.from_state_id).to eq(designed.id)
+        expect(tested.reload.from_state_id).to eq(assembled.id)
+        expect(painted.reload.from_state_id).to eq(tested.id)
+      end
+    end
+
+    context 'PUT /api/v1/states/:id/down' do
+      let(:user) { create :admin }
+
+      it 'should move state up one position when no grandparent state exists' do
+        put "/api/v1/states/#{assembled.id}/down"
+        expect(response.status).to eq(200)
+
+        expect(designed.reload.from_state_id).to eq(nil)
+        expect(painted.reload.from_state_id).to eq(designed.id)
+        expect(tested.reload.from_state_id).to eq(assembled.id)
+        expect(assembled.reload.from_state_id).to eq(painted.id)
+      end
+
+      it 'should move state up one position' do
+        put "/api/v1/states/#{painted.id}/down"
+        expect(response.status).to eq(200)
+
+        expect(designed.reload.from_state_id).to eq(nil)
+        expect(assembled.reload.from_state_id).to eq(designed.id)
+        expect(tested.reload.from_state_id).to eq(assembled.id)
+        expect(painted.reload.from_state_id).to eq(tested.id)
+      end
+
+      it 'should move state up one position when no child state exist' do
+        put "/api/v1/states/#{tested.id}/down"
+        expect(response.status).to eq(200)
+
+        expect(designed.reload.from_state_id).to eq(nil)
+        expect(assembled.reload.from_state_id).to eq(designed.id)
+        expect(painted.reload.from_state_id).to eq(assembled.id)
+        expect(tested.reload.from_state_id).to eq(painted.id)
+      end
+    end
   end
 
   context 'without logged in user' do

@@ -1,12 +1,12 @@
 import { combineReducers } from 'redux'
 import bpeStates, { getBpeState } from './bpe_states'
 import vehicles, { getVehicle } from './vehicles'
-import users from './users'
+import currentUser from './users'
 
 const bpeReducer = combineReducers({
   bpeStates,
   vehicles,
-  users
+  currentUser
 })
 
 export default bpeReducer
@@ -22,6 +22,5 @@ export const getVehicles = (state) => {
 }
 
 export const getCurrentUser = (state) => {
-  const id = state.users.ids
-  return state.users.byId[id]
+  return state.currentUser
 }

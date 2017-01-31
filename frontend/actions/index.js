@@ -20,7 +20,7 @@ export const fetchCurrentUser = () => (dispatch, getState) => {
     response => {
       dispatch({
         type: 'FETCH_CURRENT_USER_SUCCESS',
-        response: normalize(response['user'], schema.userEntity)
+        currentUser: response['user']
       })
     },
     error => handleError(error, dispatch, 'FETCH_CURRENT_USER_FAILURE')
@@ -154,5 +154,37 @@ export const deleteBpeState = (id) => (dispatch, getState) => {
       })
     },
     error => handleError(error, dispatch, 'DELETE_BPESTATE_FAILURE')
+  )
+}
+
+export const upBpeState = (id) => (dispatch, getState) => {
+  dispatch({
+    type: 'UP_BPESTATE_REQUEST'
+  })
+
+  return api.upBpeState(id).then(
+    response => {
+      dispatch({
+        type: 'UP_BPESTATE_SUCCESS',
+        response: normalize(response['states'], schema.stateArray)
+      })
+    },
+    error => handleError(error, dispatch, 'UP_BPESTATE_FAILURE')
+  )
+}
+
+export const downBpeState = (id) => (dispatch, getState) => {
+  dispatch({
+    type: 'DOWN_BPESTATE_REQUEST'
+  })
+
+  return api.downBpeState(id).then(
+    response => {
+      dispatch({
+        type: 'DOWN_BPESTATE_SUCCESS',
+        response: normalize(response['states'], schema.stateArray)
+      })
+    },
+    error => handleError(error, dispatch, 'DOWN_BPESTATE_FAILURE')
   )
 }

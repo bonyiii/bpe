@@ -6,6 +6,7 @@ import * as actions from '../actions'
 import { getVehicles, getCurrentUser } from '../reducers'
 import AddVehicle from './add_vehicle.jsx'
 import Vehicle from './vehicle.jsx'
+import { fetchUserNeeded } from '../lib/helpers'
 
 class Vehicles extends Component {
   componentDidMount() {
@@ -14,15 +15,14 @@ class Vehicles extends Component {
 
   fetchData() {
     const { fetchVehicles, fetchCurrentUser, currentUser } = this.props
-    if (!currentUser || currentUser != {}) {
+    if (fetchUserNeeded(currentUser)) {
       fetchCurrentUser().then(response => console.log(response, "fetch user done!"))
     }
     fetchVehicles().then(response => console.log(response, "fetch vehicles done!"))
   }
 
   render() {
-    const { vehicles, toNextState, deleteVehicle } = this.props
-    const currentUser = this.props.currentUser || {}
+    const { vehicles, toNextState, deleteVehicle, currentUser } = this.props
     // console.log(Vehicles)
     return(
       <div>
@@ -30,6 +30,7 @@ class Vehicles extends Component {
         <table>
           <thead>
             <tr>
+              <th>Move</th>
               <th>Name</th>
               <th>State</th>
               <th>Actions</th>

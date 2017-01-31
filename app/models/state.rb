@@ -24,6 +24,21 @@ class State < ApplicationRecord
     where(from_state_id: nil).first
   end
 
+  def self.list
+    find_by_sql(rcte)
+  end
+
+  def self.rcte
+    <<-SQL
+        with recursive next_state AS (
+          select * from states where states.from_state_id IS NULL
+          union all
+          select s.* from states as s join next_state AS ns on (s.from_state_id = ns.id)
+        )
+        select * from next_state
+      SQL
+  end
+
   private
 
   def validate_from_state_id

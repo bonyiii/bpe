@@ -1,8 +1,6 @@
 import { connect } from 'react-redux'
 
-import { bpeStateSelect } from './bpe_state_select.jsx'
-import BpeStateSelect from './bpe_state_select.jsx'
-import { updateBpeState, deleteBpeState } from '../actions'
+import { updateBpeState, deleteBpeState, upBpeState, downBpeState } from '../actions'
 
 let BpeState = ({
   id,
@@ -18,6 +16,18 @@ let BpeState = ({
   return(
     <tr>
       <td>
+        <button
+            onClick={ () => dispatch(upBpeState(id)) }
+        >
+          Up
+        </button>
+        <button
+            onClick={ () => dispatch(downBpeState(id)) }
+        >
+          Down
+        </button>
+      </td>
+      <td>
         {
           currentUser.is_admin ?
           <input
@@ -30,23 +40,6 @@ let BpeState = ({
       <td>
         {' <- '}
         {
-          currentUser.is_admin ?
-          <select ref={ node => { select = node } }
-                  defaultValue={!!from_state && from_state.id}
-          >
-            <option></option>
-            {
-              bpeStates.map(
-                state =>
-                  <option
-                      key={state.id}
-                      value={state.id}
-                  >
-                    {state.name}
-                  </option>
-              )
-            }
-          </select> :
           (!!from_state && from_state.name)
         }
       </td>
@@ -54,14 +47,14 @@ let BpeState = ({
         currentUser.is_admin ?
         <td>
           <button
-               onClick={() => {
-                   dispatch(updateBpeState({
-                     id,
-                     name: input.value,
-                     from_state_id: select.value
-                   }))
-                 }}
-           >Update
+              onClick={() => {
+                  dispatch(updateBpeState({
+                    id,
+                    name: input.value,
+                    from_state_id: select.value
+                  }))
+                }}
+          >Update
           </button>
           <button
               onClick={() => {
