@@ -99,11 +99,11 @@ module Bpe
                 child_state = state.next_state
 
                 state.update(from_state: nil)
-                child_state&.update(from_state: nil)
+                child_state.update(from_state: nil)
                 parent_state.update(from_state: nil)
 
-                child_state&.update(from_state: parent_state)
-                parent_state.update(from_state: state)
+                child_state.update(from_state: parent_state)
+                parent_stat.update(from_state: state)
                 state.update(from_state: grandparent_state) if grandparent_state
               end
             end
@@ -129,9 +129,9 @@ module Bpe
                 # painted
                 state.update(from_state: nil)
                 child_state.update(from_state: nil)
-                grandchild_state&.update(from_state: nil)
+                grandchild_state.update(from_state: nil)
 
-                grandchild_state&.update(from_state: state)
+                grandchild_state.update(from_state: state)
                 state.update(from_state: child_state)
                 child_state.update(from_state: parent_state)
               end
