@@ -1,14 +1,15 @@
 # frozen_string_literal: true
+# rubocop:disable Metrics/ClassLength
 module Bpe
   module V1
     class States < Grape::API
       resource :states do
         desc 'Return all States'
         get do
-          states = State.all
+          states = State.list
           authorize :state, :index?
 
-          { states: states.render(:index) }
+          { states: states.map { |s| s.render(:index) } }
         end
 
         desc 'Create new state'
@@ -85,7 +86,6 @@ module Bpe
           end
         end
 
-
         route_param :id do
           desc 'Swap with place with previous state'
           put :up do
@@ -99,17 +99,17 @@ module Bpe
                 child_state = state.next_state
 
                 state.update(from_state: nil)
-                child_state.update(from_state: nil) if child_state
+                child_state&.update(from_state: nil)
                 parent_state.update(from_state: nil)
 
-                child_state.update(from_state: parent_state) if child_state
+                child_state&.update(from_state: parent_state)
                 parent_state.update(from_state: state)
                 state.update(from_state: grandparent_state) if grandparent_state
               end
             end
 
-            states = State.all
-            { states: states.render(:index) }
+            states = State.list
+            { states: states.map { |s| s.render(:index) } }
           end
 
           desc 'Swap with place with next state'
@@ -129,16 +129,16 @@ module Bpe
                 # painted
                 state.update(from_state: nil)
                 child_state.update(from_state: nil)
-                grandchild_state.update(from_state: nil) if grandchild_state
+                grandchild_state&.update(from_state: nil)
 
-                grandchild_state.update(from_state: state) if grandchild_state
+                grandchild_state&.update(from_state: state)
                 state.update(from_state: child_state)
                 child_state.update(from_state: parent_state)
               end
             end
 
-            states = State.all
-            { states: states.render(:index) }
+            states = State.list
+            { states: states.map { |s| s.render(:index) } }
           end
         end
       end

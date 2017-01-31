@@ -40,23 +40,6 @@ let BpeState = ({
       <td>
         {' <- '}
         {
-          currentUser.is_admin ?
-          <select ref={ node => { select = node } }
-                  defaultValue={!!from_state && from_state.id}
-          >
-            <option></option>
-            {
-              bpeStates.map(
-                state =>
-                  <option
-                      key={state.id}
-                      value={state.id}
-                  >
-                    {state.name}
-                  </option>
-              )
-            }
-          </select> :
           (!!from_state && from_state.name)
         }
       </td>
