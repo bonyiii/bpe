@@ -20,14 +20,14 @@ describe Bpe::V1::States do
         expect(JSON.parse(response.body)['states'].count).to eq(4)
         expect(JSON.parse(response.body)['states'])
           .to eq(
-                [{ 'id' => designed.id, 'name' => designed.name },
-                 { 'id' => assembled.id, 'name' => assembled.name,
-                   'from_state' => { 'id' => designed.id, 'name' => designed.name } },
-                 { 'id' => painted.id, 'name' => painted.name,
-                   'from_state' => { 'id' => assembled.id, 'name' => assembled.name } },
-                 { 'id' => tested.id, 'name' => tested.name,
-                   'from_state' => { 'id' => painted.id, 'name' => painted.name } }]
-              )
+            [{ 'id' => designed.id, 'name' => designed.name },
+             { 'id' => assembled.id, 'name' => assembled.name,
+               'from_state' => { 'id' => designed.id, 'name' => designed.name } },
+             { 'id' => painted.id, 'name' => painted.name,
+               'from_state' => { 'id' => assembled.id, 'name' => assembled.name } },
+             { 'id' => tested.id, 'name' => tested.name,
+               'from_state' => { 'id' => painted.id, 'name' => painted.name } }]
+          )
       end
     end
 
@@ -67,9 +67,9 @@ describe Bpe::V1::States do
         get "/api/v1/states/#{designed.id}"
         expect(JSON.parse(response.body)['state'])
           .to eq(
-                'id' => designed.id,
-                'name' => designed.name
-              )
+            'id' => designed.id,
+            'name' => designed.name
+          )
       end
 
       it 'should handle active record not found error ' do
