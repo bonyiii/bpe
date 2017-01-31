@@ -30,6 +30,7 @@ class Vehicles extends Component {
         <table>
           <thead>
             <tr>
+              <th>Move</th>
               <th>Name</th>
               <th>State</th>
               <th>Actions</th>

@@ -30,6 +30,7 @@ class BpeStates extends Component {
         <table>
           <thead>
             <tr>
+              <th>Order</th>
               <th>Name</th>
               <th>From State</th>
               <th>Actions</th>
