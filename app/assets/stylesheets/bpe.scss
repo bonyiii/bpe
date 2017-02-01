@@ -1,0 +1,67 @@
+.log-in-form {
+  margin-top: 3em;
+  border: 1px solid #cacaca;
+  padding: 1rem;
+  border-radius: 3px; }
+
+.valign-center {
+  position: relative;
+  top: 50%;
+  > .columns {
+    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    -o-transform:translateY(-50%);
+    -ms-transform:translateY(-50%);
+  }
+}
+
+$background-color: #292c2f;
+$primary-color: #87D37C;
+
+.menu {
+  background-color: $background-color;
+  padding: 1.5rem 3rem;
+  .inline-list {
+    text-align: right;
+    li {
+      float: none;
+      display: inline-block;
+    }
+    a {
+      color: #fff;
+      padding-bottom: 0.5rem;
+      &:hover {
+        color: $primary-color;
+        transition: all .3s ease-in-out;
+      }
+    }
+    .active a {
+      color: $primary-color;
+    }
+    a.logout {
+      font-weight: bold;
+      background-color: scale-color($background-color, $lightness: 10%);
+      border-radius: 3px;
+      padding: 15px;
+    }
+    a:hover {
+      border-bottom: 2px solid $primary-color;
+    }
+  }
+
+  .name {
+    text-align: center;
+    font-size:  1.5rem;
+    line-height: 1;
+    margin: 0 0 1rem 0;
+    color: #fff;
+    i {
+      color: $primary-color;
+      margin-right: 0.5rem;
+    }
+
+    @media only screen and (min-width: 40.063em) {
+      float: left;
+    }
+  }
+}
