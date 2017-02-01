@@ -5,11 +5,10 @@ const ids = (state = [], action) => {
   case 'FETCH_BPESTATES_SUCCESS':
   case 'UP_BPESTATE_SUCCESS':
   case 'DOWN_BPESTATE_SUCCESS':
+  case 'DELETE_BPESTATE_SUCCESS':
     return action.response.result
   case 'ADD_BPESTATE_SUCCESS':
     return [...state, action.response.result]
-  case 'DELETE_BPESTATE_SUCCESS':
-    return state.filter((item) => item != action.id)
   default:
     return state
   }

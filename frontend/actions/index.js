@@ -150,7 +150,7 @@ export const deleteBpeState = (id) => (dispatch, getState) => {
     response => {
       dispatch({
         type: 'DELETE_BPESTATE_SUCCESS',
-        id
+        response: normalize(response['states'], schema.stateArray)
       })
     },
     error => handleError(error, dispatch, 'DELETE_BPESTATE_FAILURE')
