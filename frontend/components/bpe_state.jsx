@@ -50,8 +50,7 @@ let BpeState = ({
               onClick={() => {
                   dispatch(updateBpeState({
                     id,
-                    name: input.value,
-                    from_state_id: select.value
+                    name: input.value
                   }))
                 }}
           >Update

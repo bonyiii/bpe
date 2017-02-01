@@ -61,7 +61,18 @@ module Bpe
           delete do
             state = State.find(params[:id])
             authorize state, :destroy?
-            state.destroy!
+
+            ActiveRecord::Base.transaction do
+              if state.next_state
+                state.next_state.from_state = nil
+                state.next_state.save
+                state.destroy!
+                state.next_state.from_state = state.from_state
+                state.next_state.save
+              else
+                state.destroy!
+              end
+            end
 
             { result: 'State deleted' }.to_json
           end
@@ -99,11 +110,11 @@ module Bpe
                 child_state = state.next_state
 
                 state.update(from_state: nil)
-                child_state.update(from_state: nil)
+                child_state&.update(from_state: nil)
                 parent_state.update(from_state: nil)
 
-                child_state.update(from_state: parent_state)
-                parent_stat.update(from_state: state)
+                child_state&.update(from_state: parent_state)
+                parent_state.update(from_state: state)
                 state.update(from_state: grandparent_state) if grandparent_state
               end
             end
@@ -129,9 +140,9 @@ module Bpe
                 # painted
                 state.update(from_state: nil)
                 child_state.update(from_state: nil)
-                grandchild_state.update(from_state: nil)
+                grandchild_state&.update(from_state: nil)
 
-                grandchild_state.update(from_state: state)
+                grandchild_state&.update(from_state: state)
                 state.update(from_state: child_state)
                 child_state.update(from_state: parent_state)
               end
