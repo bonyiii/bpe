@@ -111,6 +111,14 @@ describe Bpe::V1::States do
           end.to change { State.count }.by(-1)
           expect(JSON.parse(response.body)).to eq('result' => 'State deleted')
         end
+
+        it 'should delete state from the middle of the chain' do
+          expect do
+            delete "/api/v1/states/#{assembled.id}"
+          end.to change { State.count }.by(-1)
+          expect(JSON.parse(response.body)).to eq('result' => 'State deleted')
+          expect(painted.reload.from_state_id).to eq(designed.id)
+        end
       end
 
       context 'regular user' do

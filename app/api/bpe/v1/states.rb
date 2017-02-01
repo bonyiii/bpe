@@ -64,11 +64,12 @@ module Bpe
 
             ActiveRecord::Base.transaction do
               if state.next_state
-                state.next_state.from_state = nil
-                state.next_state.save
-                state.destroy!
-                state.next_state.from_state = state.from_state
-                state.next_state.save
+                next_state = state.next_state
+                next_state.from_state = nil
+                next_state.save
+                state.reload.destroy!
+                next_state.from_state = state.from_state
+                next_state.save
               else
                 state.destroy!
               end
