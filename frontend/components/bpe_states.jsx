@@ -16,9 +16,9 @@ class BpeStates extends Component {
   fetchData() {
     const { fetchBpeStates, fetchCurrentUser, currentUser } = this.props
     if (fetchUserNeeded(currentUser)) {
-      fetchCurrentUser().then(response => console.log(response, "fetch user done!"))
+      fetchCurrentUser().then(response => console.log("fetch user done!"))
     }
-    fetchBpeStates().then(response => console.log(response, "fetchBpeStates done!"))
+    fetchBpeStates().then(response => console.log("fetchBpeStates done!"))
   }
 
   render() {

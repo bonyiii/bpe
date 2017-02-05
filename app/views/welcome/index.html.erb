@@ -1,11 +1,15 @@
 <% if current_user %>
-  <%= "Welcome #{current_user.first_name} #{current_user.last_name}" %>
-  <%= link_to 'Api explorer', grape_swagger_rails_path %>
-  <%= link_to 'Log_out', destroy_user_session_path %>
+<nav class="menu">
+  <h1 class="name"><i class="fi-widget"></i><%= "#{current_user.first_name} #{current_user.last_name}" %></h1>
+  <ul class="inline-list">
+    <li><%= link_to 'Api explorer', grape_swagger_rails_path %></li>
+    <li><%= link_to 'Log_out', destroy_user_session_path, class: 'logout' %></li>
+  </ul>
+</nav>
 
-  <div id="react-app"> </div>
-  <%= javascript_include_tag 'vendor.bundle' %>
-  <%= javascript_include_tag 'bundle' %>
+<div id="react-app"> </div>
+<%= javascript_include_tag 'vendor.bundle' %>
+<%= javascript_include_tag 'bundle' %>
 <% else %>
-  <%= link_to 'Log in', new_user_session_path %>
+<%= link_to 'Log in', new_user_session_path %>
 <% end %>

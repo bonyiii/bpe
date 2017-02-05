@@ -14,10 +14,18 @@ const Vehicle = ({
       {state.name}
     </td>
     <td>
-      { has_next_state &&
-        <button onClick={onToNextStateClick}>Next state</button>
-      }
-    { currentUser.is_admin ? <button onClick={deleteVehicle}>Delete</button> : '' }
+      <div className="row">
+        <div className="column medium-6">
+          { has_next_state &&
+            <button onClick={onToNextStateClick} className="button">Next state</button>
+          }
+        </div>
+        <div className="column medium-6">
+          { currentUser.is_admin
+            && <button onClick={deleteVehicle} className="button alert">Delete</button>
+          }
+        </div>
+      </div>
     </td>
   </tr>
 )
