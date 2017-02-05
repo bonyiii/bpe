@@ -6,7 +6,7 @@ let AddVehicle = ({ dispatch }) => {
 
   return (
     <div className="row">
-      <div className="column">
+      <div className="column medium-9">
         <label>
           <input
               ref={ node => {

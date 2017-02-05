@@ -5,9 +5,9 @@ const ACTIVE = { color: 'red' }
 const App = ({
   children
 }) => (
-  <div className="panel">
-    <div className="row header align-center">
-      <div className="column medium-7">
+  <div className="panel ">
+    <div className="row header ">
+      <div className="column medium-7 medium-centered ">
         <ul className="tabs text-center">
           <li className="tabs-title">
             <Link to='/states' activeStyle={ACTIVE}>States</Link>
@@ -20,7 +20,7 @@ const App = ({
     </div>
 
     <div className="row content align-center">
-      <div className="column medium-7">
+      <div className="column medium-7 medium-centered">
         {children}
       </div>
     </div>

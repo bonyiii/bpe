@@ -1,8 +1,10 @@
 .log-in-form {
-  margin-top: 3em;
+  margin-top: 20em;
   border: 1px solid #cacaca;
   padding: 1rem;
-  border-radius: 3px; }
+  border-radius: 3px;
+  background-color: #fff;
+}
 
 .valign-center {
   position: relative;
@@ -67,7 +69,6 @@ $primary-color: #1779ba;
 }
 
 .panel {
-
   margin-top: 5rem;
   .tabs {
     .tabs-title {
