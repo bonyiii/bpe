@@ -9,44 +9,59 @@ let AddBpeState = ({
   let select
 
   return (
-    <div>
-      <input
-          ref={ node => {
-              input = node
-            }}
-          onKeyPress={ (e) => {
-              if (e.key === "Enter") {
+    <div className="row">
+      <div className="column medium-5">
+        <label>
+          <input
+              ref={ node => {
+                  input = node
+                }}
+              type="text"
+              placeholder="Add new state"
+              onKeyPress={ (e) => {
+                  if (e.key === "Enter") {
+                    dispatch(addBpeState({
+                      name: input.value,
+                      from_state_id: select.value
+                    }))
+                    input.value = ""
+                  }
+                }}
+          />
+        </label>
+      </div>
+      <div className="column medium-4">
+        <label>
+          <select ref={ node => { select = node } }>
+            <option></option>
+            {
+              bpeStates.map(
+                state =>
+                  <option
+                      key={state.id}
+                      value={state.id}
+                  >
+                    {state.name}
+                  </option>
+              )
+            }
+          </select>
+        </label>
+      </div>
+      <div className="column medium-3">
+        <button
+            onClick={ () => {
                 dispatch(addBpeState({
                   name: input.value,
                   from_state_id: select.value
                 }))
                 input.value = ""
-              }
-            }}
-      />
-      <select ref={ node => { select = node } }>
-        <option></option>
-        {
-          bpeStates.map(
-            state =>
-              <option
-                  key={state.id}
-                  value={state.id}
-              >
-                {state.name}
-              </option>
-          )
-        }
-      </select>
-      <button onClick={ () => {
-          dispatch(addBpeState({
-            name: input.value,
-            from_state_id: select.value
-          }))
-          input.value = ""
-        }}>
-        Add State
-      </button>
+              }}
+            className="button"
+        >
+          Add State
+        </button>
+      </div>
     </div>
   )
 }

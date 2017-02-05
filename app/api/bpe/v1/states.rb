@@ -59,11 +59,25 @@ module Bpe
         desc 'Delete state'
         route_param :id do
           delete do
+            status 200
             state = State.find(params[:id])
             authorize state, :destroy?
-            state.destroy!
 
-            { result: 'State deleted' }.to_json
+            ActiveRecord::Base.transaction do
+              if state.next_state
+                next_state = state.next_state
+                next_state.from_state = nil
+                next_state.save
+                state.reload.destroy!
+                next_state.from_state = state.from_state
+                next_state.save
+              else
+                state.destroy!
+              end
+            end
+
+            states = State.list
+            { states: states.map { |s| s.render(:index) } }
           end
         end
 

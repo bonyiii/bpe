@@ -1,5 +1,4 @@
 import { connect } from 'react-redux'
-
 import { updateBpeState, deleteBpeState, upBpeState, downBpeState } from '../actions'
 
 let BpeState = ({
@@ -16,21 +15,27 @@ let BpeState = ({
   return(
     <tr>
       <td>
-        <button
-            onClick={ () => dispatch(upBpeState(id)) }
-        >
-          Up
-        </button>
-        <button
-            onClick={ () => dispatch(downBpeState(id)) }
-        >
-          Down
-        </button>
+        <div className="row">
+          <div className="column medium-6">
+
+            <i className="fi-arrow-up"
+               onClick={ () => dispatch(upBpeState(id)) }
+            >
+            </i>
+          </div>
+          <div className="column medium-6">
+            <i className="fi-arrow-down"
+               onClick={ () => dispatch(downBpeState(id)) }
+            >
+            </i>
+          </div>
+        </div>
       </td>
       <td>
         {
           currentUser.is_admin ?
           <input
+              type="text"
               defaultValue={name}
               ref={ node => input = node }
           /> :
@@ -46,25 +51,33 @@ let BpeState = ({
       {
         currentUser.is_admin ?
         <td>
-          <button
-              onClick={() => {
-                  dispatch(updateBpeState({
-                    id,
-                    name: input.value,
-                    from_state_id: select.value
-                  }))
-                }}
-          >Update
-          </button>
-          <button
-              onClick={() => {
-                  dispatch(deleteBpeState(id))
-                }}
-          >
-            Delete
-          </button>
+          <div className="row">
+            <div className="column medium-6">
+              <button
+                  onClick={() => {
+                      dispatch(updateBpeState({
+                        id,
+                        name: input.value
+                      }))
+                    }}
+                  className="button"
+              >Update
+              </button>
+            </div>
+            <div className="column medium-6">
+              <button
+                  onClick={() => {
+                      dispatch(deleteBpeState(id))
+                    }}
+                  className="alert button"
+              >
+                Delete
+              </button>
+            </div>
+          </div>
         </td> :
         <td></td>
+
       }
     </tr>
   )

@@ -5,24 +5,35 @@ let AddVehicle = ({ dispatch }) => {
   let input
 
   return (
-    <div>
-      <input
-          ref={ node => {
-              input = node
-            }}
-          onKeyPress={ (e) => {
-              if (e.key === "Enter") {
+    <div className="row">
+      <div className="column medium-9">
+        <label>
+          <input
+              ref={ node => {
+                  input = node
+                }}
+              type="text"
+              placeholder="Add new vehicle"
+              onKeyPress={ (e) => {
+                  if (e.key === "Enter") {
+                    dispatch(addVehicle(input.value))
+                    input.value = ""
+                  }
+                }}
+          />
+        </label>
+      </div>
+      <div className="column medium-3">
+        <button
+            onClick={ () => {
                 dispatch(addVehicle(input.value))
                 input.value = ""
-              }
-            }}
-      />
-      <button onClick={ () => {
-          dispatch(addVehicle(input.value))
-          input.value = ""
-        }}>
-        Add Vehicle
-      </button>
+              }}
+            className="button"
+        >
+          Add Vehicle
+        </button>
+      </div>
     </div>
   )
 }
