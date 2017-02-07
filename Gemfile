@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby "2.3.0"
+ruby "2.3.1"
 
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
@@ -76,6 +76,8 @@ group :test do
   gem 'poltergeist'
   gem 'selenium-webdriver'
   gem 'database_cleaner'
+  gem 'cucumber-rails', :require => false
+  gem 'spreewald'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
