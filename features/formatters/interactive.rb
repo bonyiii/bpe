@@ -26,8 +26,7 @@ module Interactive
         step_info = test_step.name.to_s
         run_text_pre = 'run ['
         run_text_post = ']'
-        msg = "\033[33m#{run_text_pre}\033[0m\033[34m#{step_info}"
-        msg << "\033[0m\033[33m#{run_text_post}\033[0m"
+        msg = "\033[33m#{run_text_pre}\033[0m\033[34m#{step_info}\033[0m\033[33m#{run_text_post}\033[0m"
         @io.print msg
         pressed_key = STDIN.respond_to?(:getch) ? STDIN.getch : STDION.gets.chomp
         @io.flush
