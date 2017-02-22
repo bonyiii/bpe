@@ -6,10 +6,10 @@
     <li><%= link_to 'Log_out', destroy_user_session_path, class: 'logout' %></li>
   </ul>
 </nav>
+<% else %>
+<%= link_to 'Log in', new_user_session_path %>
+<% end %>
 
 <div id="react-app"> </div>
 <%= javascript_include_tag 'vendor.bundle' %>
 <%= javascript_include_tag 'bundle' %>
-<% else %>
-<%= link_to 'Log in', new_user_session_path %>
-<% end %>
