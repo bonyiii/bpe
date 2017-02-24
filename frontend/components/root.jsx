@@ -4,6 +4,7 @@ import { Router, Route, browserHistory } from 'react-router'
 
 import BpeStates from './bpe_states.jsx'
 import Vehicles from './vehicles.jsx'
+import Login from './login.jsx'
 import App from './app.jsx'
 
 const emptyObject = (obj) => (
@@ -17,24 +18,26 @@ const Root = ({ store }) => {
 
     if (emptyObject(currentUser)) {
       console.log("Not signed in, yet")
-      replaceState(null, "/")
+      replaceState({
+        pathname: '/login',
+        state: { nextPathname: nextState.location.pathname }
+      })
     }
     //else {
     // replaceState(null, nextState.location.pathname)
     //}
   }
 
-return(
-  <Provider store={store}>
-    <Router history={browserHistory}>
-      <Route path="/" component={App} >
-        <Route onEnter={checkAuth}>
-          <Route path='/states' component={BpeStates} />
-          <Route path='/vehicles' component={Vehicles} />
-        </Route>
+  return(
+    <Provider store={store}>
+      <Router history={browserHistory}>
+        <Route path="/" component={App} >
+        <Route path='/states' component={BpeStates} onEnter={checkAuth} />
+        <Route path='/vehicles' component={Vehicles} onEnter={checkAuth} />
+        <Route path='/login' component={Login} />
       </Route>
-    </Router>
-  </Provider>
+      </Router>
+    </Provider>
   )
 }
 Root.propTypes ={
