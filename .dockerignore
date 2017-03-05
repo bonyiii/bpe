@@ -1,0 +1,12 @@
+.git
+.gitignore
+coverage
+data/*
+log/*
+tmp/*
+ci/*
+public/assets
+Dockerfile
+README.md
+codeship-services.yml
+codeship-steps.yml:
