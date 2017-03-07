@@ -11,6 +11,22 @@ const handleError = (error, dispatch, type) => {
   }
 }
 
+export const login = (formData) => (dispatch, getState) => {
+  dispatch({
+    type: 'LOGIN'
+  })
+
+  return api.login(formData).then(
+    response => {
+      dispatch({
+        type: 'LOGIN_SUCCESS',
+        currentUser: response['user']
+      })
+    },
+    error => handleError(error, dispatch, 'LOGIN_FAILURE')
+  )
+}
+
 export const fetchCurrentUser = () => (dispatch, getState) => {
   dispatch({
     type: 'FETCH_CURRENT_USER_REQUEST'

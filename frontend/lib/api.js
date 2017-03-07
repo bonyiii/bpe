@@ -1,3 +1,7 @@
+export const login = (formData) => (
+  jQuery.post('/api/login', formData)
+)
+
 export const fetchCurrentUser = () => (
   jQuery.get('/api/v1/users')
 )
