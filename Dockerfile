@@ -1,4 +1,4 @@
-FROM rails-base
+FROM bpe_base
 
 ARG APP_DIR=/var/www/bpe
 

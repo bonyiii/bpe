@@ -5,7 +5,7 @@ services:
     build:
       context: dockers/base
       dockerfile_path: Dockerfile
-      image: rails_base
+      image: bpe_base
   api:
     cached: true
     # env_file: ./api/bpe/.env.sample
