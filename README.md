@@ -36,3 +36,7 @@ Tha api can be tested with swagger but only available after login.
 
 The app deployed to: http://bpeboni.herokuapp.com/
 The api explorer can be found here: http://bpeboni.herokuapp.com/swagger
+
+## CI
+
+Tests runs on codeship in docker containers.
