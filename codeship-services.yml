@@ -1,13 +1,13 @@
 version: '2'
 services:
   base:
-    cached: true
+    #cached: true
     build:
       context: dockers/base
       dockerfile_path: Dockerfile
       image: bpe_base
   api:
-    cached: true
+    #cached: true
     # env_file: ./api/bpe/.env.sample
     build:
       context: .
