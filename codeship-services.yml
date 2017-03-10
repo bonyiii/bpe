@@ -1,0 +1,40 @@
+version: '2'
+services:
+  base:
+    cached: true
+    build:
+      context: dockers/base
+      dockerfile_path: Dockerfile
+      image: rails_base
+  api:
+    cached: true
+    # env_file: ./api/bpe/.env.sample
+    build:
+      context: .
+      dockerfile_path: Dockerfile
+      image: bpe_api
+      args:
+        - APP_DIR=/var/www/bpe
+    links:
+      - db
+    environment:
+      - DB_HOST=db
+      - DB_USER=bpe
+      - DB_PASS=123456
+      - RAILS_ENV=test
+#    volumes:
+#      - ./api/bpe:/var/www/bpe
+#      - ./api/bpe/gems:/usr/local/bundle
+    ports:
+      # - "${PORT}:${PORT}"
+      - "3000:3000"
+  db:
+    cached: true
+    build:
+      context: dockers/pg
+      dockerfile_path: Dockerfile
+      image: bpe_pg
+    environment:
+      - LC_ALL=C.UTF-8
+      - RAILS_ENV=test
+      - DB_USER=bpe

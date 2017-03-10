@@ -13,16 +13,16 @@ case "$1" in
         fi
 
 	if [ ! -s config/secrets.yml ]; then
-	    if [ "$APP_SECRET_KEY_BASE" ]; then
+	    if [ "$SYNLAB_SECRET_KEY_BASE" ]; then
 		cat > 'config/secrets.yml' <<-YML
 					$RAILS_ENV:
-					  secret_key_base: "$APP_SECRET_KEY_BASE"
+					  secret_key_base: "$SYNLAB_SECRET_KEY_BASE"
 				YML
 	    elif [ ! -f /usr/src/redmine/config/initializers/secret_token.rb ]; then
 		rake generate_secret_token
 	    fi
 	fi
-	if [ "$1" != 'rake' -a -z "$APP_NO_DB_MIGRATE" ]; then
+	if [ "$1" != 'rake' -a -z "$SYNLAB_NO_DB_MIGRATE" ]; then
 	    gosu dev rake db:migrate
 	fi
 

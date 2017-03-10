@@ -47,7 +47,7 @@ RUN echo 'PATH=/home/dev/bin:$PATH' >> /home/dev/.bashrc \
     && mkdir -p $APP_DIR \
     && chown dev $APP_DIR \
     && chown dev:dev /home/dev/bin -R
-
+    
 WORKDIR $APP_DIR
 
 COPY docker-entrypoint.sh /

@@ -36,7 +36,10 @@ services:
     volumes: 
       - ./api/bpe:/var/www/bpe
   db:
-    image: postgres
+    build:
+      context: pg
+    image: bpe_pg
+    env_file: ./api/bpe/.env.sample
     environment:
       - LC_ALL=C.UTF-8
     volumes:

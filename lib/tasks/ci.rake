@@ -6,6 +6,7 @@ namespace :ci do
   desc 'Run CI Tasks'
   task build: :environment do
     build_frontend
+    Rake::Task['db:migrate'].invoke
     Rake::Task['ci:factory_lint'].invoke
     sh 'rubocop app lib spec config'
     sh 'rubycritic app lib --no-browser -f json'

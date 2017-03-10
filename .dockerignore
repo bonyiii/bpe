@@ -9,4 +9,5 @@ public/assets
 Dockerfile
 README.md
 codeship-services.yml
-codeship-steps.yml:
+codeship-steps.yml
+gems
