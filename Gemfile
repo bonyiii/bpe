@@ -50,6 +50,8 @@ gem 'foundation-rails'
 gem 'foundation-icons-sass-rails'
 
 gem 'shrine'
+gem 'roda'
+gem 'aws-sdk'
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
