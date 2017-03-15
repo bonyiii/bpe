@@ -1,9 +1,13 @@
 version: '2'
 services:
-  api:
-    env_file: ./api/bpe/.env.sample
+  base:
     build:
-      context: api
+      context: dockers/base
+    image: rails-base
+  api:
+    env_file: .env
+    build:
+      context: dockers/api
       args:
         - APP_DIR=/var/www/bpe
     image: bpe_api
@@ -11,35 +15,36 @@ services:
       - bpe_network
     depends_on:
       - db
+      - base
     environment:
       - DB_HOST=db
       - DB_USER=postgres
     volumes: 
-      - ./api/bpe:/var/www/bpe
-      - ./api/bpe/gems:/usr/local/bundle
+      - ./:/var/www/bpe
+      - ./gems:/usr/local/bundle
     ports:
 #- "${PORT}:${PORT}"
       - "3000:3000"
+    stdin_open: true
+    tty: true
   fe:
     build:
-      context: fe
+      context: dockers/fe
       args:
         - APP_DIR=/var/www/bpe
     image: bpe_fe
     #command: gosu dev npm start
     networks:
-      bpe_network:
-        aliases:
-          - frontend
+      - bpe_network
     depends_on:
       - api
     volumes: 
-      - ./api/bpe:/var/www/bpe
+      - ./:/var/www/bpe
   db:
     build:
-      context: pg
+      context: dockers/pg
     image: bpe_pg
-    env_file: ./api/bpe/.env.sample
+    env_file: .env.sample
     environment:
       - LC_ALL=C.UTF-8
     volumes:
