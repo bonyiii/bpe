@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class Vehicle < ApplicationRecord
   belongs_to :state
 
@@ -9,13 +10,13 @@ class Vehicle < ApplicationRecord
   before_validation :initial_state
 
   json(:index,
-       only: %i(id name),
-       methods: %i(has_next_state),
+       only: %i[id name],
+       methods: %i[has_next_state],
        include: { state: State.json(:index) })
 
   json(:detail,
-       only: %i(id name),
-       methods: %i(has_next_state),
+       only: %i[id name],
+       methods: %i[has_next_state],
        include: { state: State.json(:index) })
 
   def next_state?

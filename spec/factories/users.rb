@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 FactoryGirl.define do
   factory :base_user, class: User do
     first_name { Faker::Name.first_name }

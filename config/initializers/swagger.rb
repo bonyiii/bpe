@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 GrapeSwaggerRails.options.url      = '/swagger_doc.json'
 GrapeSwaggerRails.options.app_url  = ENV['SWAGGER_URL']
 GrapeSwaggerRails.options.before_action do |_request|

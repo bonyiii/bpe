@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -11,8 +12,8 @@ class User < ApplicationRecord
   validates :last_name, presence: true
 
   json(:index,
-       only: %i(id email first_name last_name),
-       methods: %i(is_admin))
+       only: %i[id email first_name last_name],
+       methods: %i[is_admin])
 
   def role?(role_name)
     roles.where(name: role_name).exists?

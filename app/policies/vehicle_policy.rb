@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class VehiclePolicy < ApplicationPolicy
   def index?
     true

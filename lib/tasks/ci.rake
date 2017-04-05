@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'factory_girl_rails' if Rails.env.test?
 
 # rubocop:disable Metrics/BlockLength

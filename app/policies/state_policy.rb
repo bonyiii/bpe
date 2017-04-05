@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class StatePolicy < ApplicationPolicy
   def index?
     true

@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 namespace :project do
   task :build_frontend do
     system 'npm --no-color install -g yarn'
